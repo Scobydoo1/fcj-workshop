@@ -1,57 +1,78 @@
+# ☁️ AWS Training Worklog: Week 5 - Capstone: Highly Available Web Application
+
+**Status:** 🟢 Completed  
+**Timeframe:** 02/02/2025 - 08/02/2025  
+**Objective:** Integrate core AWS services to architect and deploy a resilient, highly available 3-tier web application.
+
+This document tracks my Week 5 progress. This week serves as the culmination of the foundational training, executing the "Highly Available Web Application Workshop." The goal is to bring together networking, compute, storage, and databases into a unified, fault-tolerant system.
+
 ---
-title: "Week 5 Worklog"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.5. </b> "
+
+## 📅 Daily Task Log
+
+### Module 5.1: Architecture Design & Network Preparation
+* **Date Completed:** 03/02/2025
+* **Time Spent:** 2.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Reviewed the 3-tier architecture blueprint provided in the workshop.
+- [x] Audited the VPC created in Week 2 to ensure public subnets are ready for Load Balancers and private subnets are strictly isolated for Application Servers and Databases.
+- [x] Configured a centralized Security Group matrix (ALB -> EC2 -> RDS) to enforce strict traffic flow.
+
+**Notes & Observations:**
+> Designing the network boundaries first made the deployment much smoother. This exact 3-tier model is what I will use moving forward to deploy our React frontends (Tier 1/Edge), Java Spring Boot APIs (Tier 2/Compute), and MySQL databases (Tier 3/Data).
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 5.2: Deploying the Data Tier (Multi-AZ RDS)
+* **Date Completed:** 05/02/2025
+* **Time Spent:** 3.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 5 Objectives:
+**Work Performed:**
+- [x] Upgraded the single-node RDS instance from Week 3 into a Multi-AZ deployment.
+- [x] Verified the standby replica in the secondary Availability Zone.
+- [x] Executed a manual reboot with failover to test database resilience and monitor downtime.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Troubleshooting / Learnings:**
+> The failover process took a couple of minutes, during which the database endpoint temporarily stopped responding before DNS updated to point to the standby instance. Application-level retry logic will be critical in the Spring Boot backend to handle these brief interruptions gracefully.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Module 5.3: Compute Tier & Application Load Balancing
+* **Date Completed:** 06/02/2025
+* **Time Spent:** 4.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 5 Achievements:
+**Work Performed:**
+- [x] Provisioned an Application Load Balancer (ALB) across two public subnets.
+- [x] Updated the EC2 Auto Scaling Group (ASG) from Week 3 to register instances automatically with the ALB Target Group.
+- [x] Deployed a sample backend API on the EC2 instances using a User Data bootstrap script.
+- [x] Configured Health Checks on the ALB to ensure traffic is only routed to healthy instances.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Artifacts:**
+- 🖼️ `[alb-target-group-healthy.png]`
+- 📄 `[ec2-bootstrap-userdata.sh]`
 
-* Successfully created and configured an AWS Free Tier account.
+---
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+### Module 5.4: Frontend Integration & End-to-End Testing
+* **Date Completed:** 08/02/2025
+* **Time Spent:** 3.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+**Work Performed:**
+- [x] Hosted the frontend application assets on the S3 bucket configured in Week 3.
+- [x] Updated the frontend API configuration to point to the newly created ALB DNS name.
+- [x] Used Route 53 to map a custom domain to the ALB.
+- [x] Performed an end-to-end stress test using a load-generation tool to observe the ASG scaling out and the ALB distributing traffic evenly.
 
-* Used AWS CLI to perform basic operations such as:
+**Notes & Observations:**
+> Watching the entire system work in harmony was incredibly satisfying. When the CPU spiked during the stress test, CloudWatch triggered the alarm, the ASG spun up a new instance, and the ALB immediately started routing traffic to it once it passed health checks.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+---
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Successfully deployed a fully functional, highly available 3-tier architecture capable of self-healing and automatic scaling.
+* **Concepts to review later:** Integrating AWS Certificate Manager (ACM) to enable HTTPS on the Application Load Balancer for secure end-to-end encryption.
