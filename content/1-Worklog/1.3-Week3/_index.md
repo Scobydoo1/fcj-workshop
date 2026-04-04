@@ -1,57 +1,70 @@
+# ☁️ AWS Training Worklog: Week 3 - Storage, Databases & Auto Scaling
+
+**Status:** 🟢 Completed  
+**Timeframe:** 19/01/2025 - 25/01/2025  
+**Objective:** Deploy scalable database solutions, configure secure object storage for frontend assets, and implement dynamic compute scaling.
+
+This document tracks my Week 3 progress during my OJT at AWS. Building on the network topology established last week, this week's focus is on adding stateful storage, persistent data management, and high availability.
+
 ---
-title: "Week 3 Worklog"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.3. </b> "
+
+## 📅 Daily Task Log
+
+### Module 3.1: Object Storage (Amazon S3)
+* **Date Completed:** 20/01/2025
+* **Time Spent:** 2.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Created a new Amazon S3 bucket with a globally unique name.
+- [x] Disabled "Block Public Access" and attached a custom JSON Bucket Policy to allow public read access to specific objects.
+- [x] Enabled Static Website Hosting on the bucket.
+- [x] Uploaded a sample `index.html` and `error.html` to test the endpoint.
+
+**Notes & Observations:**
+> S3 static hosting is incredibly cost-effective. This setup is perfectly suited for hosting the compiled static assets of our React frontends without needing to provision dedicated web servers. 
+
+**Artifacts:**
+- 📄 `[s3-public-read-policy.json]`
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 3.2: Relational Databases (Amazon RDS)
+* **Date Completed:** 22/01/2025
+* **Time Spent:** 4.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 3 Objectives:
+**Work Performed:**
+- [x] Configured a DB Subnet Group targeting the Private Subnets created in Week 2.
+- [x] Provisioned a Free Tier MySQL RDS instance (db.t3.micro).
+- [x] Configured the RDS Security Group to strictly allow inbound traffic on Port 3306 *only* from the EC2 application server's Security Group.
+- [x] Connected to the database from the bastion EC2 instance using the MySQL CLI client.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Troubleshooting / Learnings:**
+> Placing the RDS instance in the private subnet ensures it has no public IP, protecting it from direct internet exposure. This database topology is exactly what I need to securely connect the Java Spring Boot backends I will be deploying later.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+**Artifacts:**
+- 🖼️ `[rds-connectivity-success-20250122.png]`
 
+---
 
-### Week 3 Achievements:
+### Module 3.3: High Availability (Amazon EC2 Auto Scaling)
+* **Date Completed:** 24/01/2025
+* **Time Spent:** 3.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Work Performed:**
+- [x] Created an EC2 Launch Template with the pre-configured AMI and Security Groups from Week 2.
+- [x] Defined an Auto Scaling Group (ASG) spanning multiple public subnets.
+- [x] Set Minimum, Desired, and Maximum capacity limits (e.g., Min: 1, Max: 3).
+- [x] Configured a Target Tracking Scaling Policy to add instances if average CPU utilization exceeds 70%.
+- [x] Stress-tested the primary instance to trigger a scale-out event.
 
-* Successfully created and configured an AWS Free Tier account.
+**Notes & Observations:**
+> Watching the ASG automatically spin up a new instance during the stress test was a great demonstration of cloud elasticity. Ensuring the Launch Template includes a startup bash script (User Data) is critical so new instances boot up with the application already running.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+---
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Successfully isolated the database layer in a private network while maintaining secure access, and achieved automated high availability for compute resources.
+* **Concepts to review later:** Need to practice creating cross-account S3 replication policies, and look into RDS Read Replicas for database scaling.
