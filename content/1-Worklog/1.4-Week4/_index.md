@@ -1,57 +1,68 @@
+# ☁️ AWS Training Worklog: Week 4 - Monitoring, DNS & Dev Tools
+
+**Status:** 🟢 Completed  
+**Timeframe:** 26/01/2025 - 01/02/2025  
+**Objective:** Implement system observability, configure hybrid DNS routing, and explore integrated cloud developer environments.
+
+This document tracks my Week 4 progress during my AWS OJT. With storage, compute, and databases in place, this week focuses on gaining visibility into those resources, routing traffic securely, and streamlining the development workflow.
+
 ---
-title: "Week 4 Worklog"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.4. </b> "
+
+## 📅 Daily Task Log
+
+### Module 4.1: Observability & Monitoring (Amazon CloudWatch)
+* **Date Completed:** 27/01/2025
+* **Time Spent:** 3.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Configured the CloudWatch Agent on the existing EC2 instances to track memory and disk utilization (which aren't tracked by default).
+- [x] Created a custom CloudWatch Dashboard centralizing EC2 CPU metrics, RDS connections, and ASG network traffic.
+- [x] Set up CloudWatch Alarms to trigger an SNS email notification if database CPU utilization exceeds 80% for 5 minutes.
+- [x] Explored CloudWatch Logs and log groups.
+
+**Notes & Observations:**
+> Getting comfortable with CloudWatch Logs is a priority. Understanding how log streams are ingested and structured is the necessary first step for building out the AWS Sentinel log anomaly detection system later this month.
+
+**Artifacts:**
+- 🖼️ `[cloudwatch-custom-dashboard.png]`
+- 📄 `[cloudwatch-agent-config.json]`
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 4.2: DNS & Traffic Routing (Amazon Route 53)
+* **Date Completed:** 29/01/2025
+* **Time Spent:** 3.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 4 Objectives:
+**Work Performed:**
+- [x] Registered a test domain name (or used a local host file mapping for simulation).
+- [x] Created a Route 53 Hosted Zone.
+- [x] Configured 'A' Records to route traffic to the EC2 Auto Scaling Group.
+- [x] Configured Alias records mapping a subdomain directly to the S3 bucket configured for static website hosting in Week 3.
+- [x] Set up an integrated hybrid DNS system between a simulated Local environment and the Amazon VPC.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Troubleshooting / Learnings:**
+> Routing the domain directly to the S3 bucket is a very clean way to expose the React frontend to users. In a production scenario, I would place CloudFront in front of S3 and point Route 53 to the CloudFront distribution for edge caching and HTTPS support.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Module 4.3: Cloud IDE & Simplified Compute (Cloud9 & Lightsail)
+* **Date Completed:** 31/01/2025
+* **Time Spent:** 2.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 4 Achievements:
+**Work Performed:**
+- [x] Provisioned an AWS Cloud9 environment backed by a `t2.micro` EC2 instance.
+- [x] Cloned a sample repository into the Cloud9 IDE and tested browser-based code editing and terminal access.
+- [x] Deployed a pre-configured LAMP stack on Amazon Lightsail to compare its simplicity against raw EC2 provisioning.
+- [x] Analyzed the cost differences between Lightsail's fixed pricing and EC2's on-demand pricing.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Notes & Observations:**
+> Cloud9 is incredibly useful for quick script edits or collaborative debugging directly within the AWS environment. While I'll stick to EC2/EKS for the main Java Spring Boot application deployments to have full architectural control, Lightsail proved to be an excellent, cost-predictable alternative for rapid prototyping.
 
-* Successfully created and configured an AWS Free Tier account.
+---
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Achieved full system visibility with custom CloudWatch dashboards and successfully routed DNS traffic to both compute instances and static storage.
+* **Concepts to review later:** Need to look into Route 53 Health Checks and failover routing policies to ensure the web application remains highly available during an outage.
