@@ -1,67 +1,32 @@
-# ☁️ Nhật ký Thực tập AWS: Tuần 9 - Không gian Phỏng vấn AI Thời gian thực
+# 🚀 Tổng kết Hành trình 10 tuần Kỹ thuật AWS & SmartHire
 
 **Trạng thái:** 🟢 Đã hoàn thành  
-**Thời gian:** 02/03/2025 - 08/03/2025  
-**Mục tiêu:** Thiết kế kiến trúc và lập trình Không gian Phỏng vấn (Interview Workspace) theo thời gian thực, quản lý quyền truy cập thiết bị, luồng media và các trạng thái tương tác AI phức tạp.
+**Thời gian:** Tháng 1/2025 - Tháng 3/2025  
+**Dự án:** SmartHire AI & Hạ tầng AWS Cloud  
 
-Tuần này, mình tập trung xử lý tính năng cốt lõi nhất của nền tảng SmartHire: môi trường phỏng vấn AI trực tiếp. Công việc này đòi hỏi phải vượt ra khỏi các thao tác CRUD thông thường để quản lý các luồng dữ liệu liên tục, xử lý thiết bị qua WebRTC, và điều phối đồng thời nhiều hook AI (chuyển đổi giọng nói, theo dõi cảm xúc, và thực thi mã code).
-
----
-
-## 📅 Nhật ký Công việc Hàng ngày
-
-### Bài 9.1: Layout Phỏng vấn & Quyền truy cập Thiết bị
-* **Ngày hoàn thành:** 03/03/2025
-* **Thời gian thực hiện:** 4.0 giờ
-* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
-
-**Công việc đã thực hiện:**
-- [x] Lập trình `InterviewWorkspace.tsx` làm component điều phối chính cho toàn bộ phiên phỏng vấn.
-- [x] Triển khai layout 3 phần: `LeftPanel` (hiển thị camera), `CenterPanel` (trình soạn thảo code/bảng trắng), và `RightPanel` (khung chat/transcript).
-- [x] Tạo `PermissionsModal.tsx` để xử lý mượt mà việc xin quyền truy cập camera và microphone từ trình duyệt trước khi phỏng vấn bắt đầu.
-- [x] Xây dựng hook `useMediaDevices.ts` để liệt kê các thiết bị đầu vào khả dụng và quản lý các luồng media đang hoạt động.
-
-**Ghi chú & Quan sát:**
-> Xử lý quyền trên trình duyệt khá phức tạp vì người dùng có thể từ chối hoặc gặp lỗi phần cứng. `PermissionsModal` đóng vai trò rào chắn quan trọng để đảm bảo phiên phỏng vấn không thể bắt đầu nếu không lấy được luồng camera/mic cần thiết cho AI phân tích.
+Tài liệu này cung cấp cái nhìn tổng quan về hành trình 10 tuần thực tập thực tế (OJT) của mình. Khóa đào tạo được chia thành hai giai đoạn chính: thiết lập hạ tầng cloud nền tảng và phát triển nền tảng tuyển dụng tích hợp AI (cloud-native).
 
 ---
 
-### Bài 9.2: Truyền phát Media & Trạng thái Phiên (Session)
-* **Ngày hoàn thành:** 05/03/2025
-* **Thời gian thực hiện:** 4.5 giờ
-* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
+## 🏗️ Giai đoạn 1: Nền tảng Cốt lõi AWS (Tuần 1–5)
+Nửa đầu của kỳ thực tập tập trung vào việc thiết lập một hạ tầng cloud bảo mật, bền bỉ và có khả năng mở rộng để phục vụ các ứng dụng doanh nghiệp.
 
-**Công việc đã thực hiện:**
-- [x] Phát triển hook `useMicVolume.ts` sử dụng Web Audio API (`AudioContext` và `AnalyserNode`) để tạo hiệu ứng thanh âm lượng (volume indicator) khi ứng viên đang nói.
-- [x] Tạo hook `useSessionRecorder.ts` để ghi lại video/audio trực tiếp bằng `MediaRecorder` API, chuẩn bị cho việc upload file ghi hình lên AWS S3 sau khi kết thúc.
-- [x] Lập trình `useAIState.ts` để quản lý cỗ máy trạng thái (state machine) phức tạp của AI phỏng vấn (VD: "Đang nghe", "Đang suy nghĩ", "Đang nói").
-- [x] Xây dựng `EndInterviewModal.tsx` để xử lý việc kết thúc phiên và dọn dẹp bộ nhớ gọn gàng.
-
-**Khắc phục sự cố / Bài học:**
-> Ban đầu mình phát hiện rò rỉ bộ nhớ (memory leaks) khi chuyển sang trang khác. Mình phải rà soát và đảm bảo mọi track media đều được dừng (`track.stop()`) và `AudioContext` phải đóng bên trong hàm dọn dẹp (cleanup) của `useEffect` trong các hook này.
-
-**Tài liệu đính kèm (Artifacts):**
-- 📄 `[useMicVolume.ts]`
-- 📄 `[useAIState.ts]`
+* **Tuần 1 (Bảo mật & Quản trị):** Khóa tài khoản root, thiết lập cảnh báo ngân sách (zero-spend), và triển khai các chính sách quản lý định danh (IAM) nghiêm ngặt kèm MFA dành cho quản trị viên hàng ngày.
+* **Tuần 2 (Mạng & Máy chủ):** Thiết kế kiến trúc mạng nội bộ (VPC) tùy chỉnh với public/private subnets và khởi tạo các máy chủ EC2 Ubuntu đầu tiên, truy cập an toàn qua SSH và gắn IAM roles.
+* **Tuần 3 (Lưu trữ, CSDL & Mở rộng):** Thiết lập S3 để lưu trữ web tĩnh, cách ly cơ sở dữ liệu MySQL trong mạng nội bộ bằng RDS, và cấu hình Auto Scaling Group (ASG) để tự động xử lý tải trọng lớn.
+* **Tuần 4 (Giám sát & Định tuyến):** Giám sát toàn hệ thống bằng các dashboard và cảnh báo CloudWatch tùy chỉnh, đồng thời cấu hình Route 53 để định tuyến lưu lượng DNS lai (hybrid DNS).
+* **Tuần 5 (Dự án Kiến trúc tổng hợp):** Kết hợp tất cả các thành phần nền tảng để triển khai một ứng dụng web 3 lớp (3-tier) có tính sẵn sàng cao và khả năng chịu lỗi, sử dụng Application Load Balancers (ALB) và cơ chế tự động chuyển dự phòng (Multi-AZ) cho database.
 
 ---
 
-### Bài 9.3: Tích hợp AI (Giọng nói, Cảm xúc, Code)
-* **Ngày hoàn thành:** 07/03/2025
-* **Thời gian thực hiện:** 5.0 giờ
-* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
+## 💻 Giai đoạn 2: Phát triển Hệ thống SmartHire AI (Tuần 6–10)
+Nửa sau của lộ trình chuyển hướng hoàn toàn sang phát triển ứng dụng (front-end), xây dựng cổng thông tin SmartHire AI bằng React/Vite và tích hợp sâu với các dịch vụ cloud-native của AWS.
 
-**Công việc đã thực hiện:**
-- [x] Triển khai `useSpeechTranscript.ts` để xử lý chuyển đổi Giọng nói thành Văn bản (chuẩn bị tích hợp Amazon Transcribe).
-- [x] Xây dựng hook `useEmotionAnalysis.ts` để chụp khung hình video định kỳ và gửi tới backend `emotion_tracker_lambda` nhằm phân tích nét mặt.
-- [x] Phát triển `useCodeRunner.ts` để thực thi các đoạn code của ứng viên một cách an toàn và trả kết quả về giao diện `CenterPanel`.
-- [x] Đồng bộ hóa tất cả các hook này bên trong `InterviewWorkspace` để dữ liệu giọng nói, cảm xúc và code được gửi tập trung về orchestrator.
-
-**Ghi chú & Quan sát:**
-> Đây là nơi nền tảng thực sự mang lại cảm giác "Trí tuệ nhân tạo". Việc thiết lập thời gian chờ (intervals) để chụp khung hình cảm xúc mà không làm đơ luồng render chính của React là một thử thách. Mình đã phải tối ưu hóa logic trích xuất khung hình để đảm bảo video của ứng viên vẫn hiển thị hoàn toàn mượt mà.
+* **Tuần 6 (Khởi động dự án & Xác thực):** Dựng khung source code React và thiết lập luồng xác thực bảo mật phân quyền (Ứng viên & Nhà tuyển dụng) bằng Amazon Cognito, phân phối an toàn qua CloudFront.
+* **Tuần 7 (Cổng Ứng viên & Upload S3):** Xây dựng dashboard cho ứng viên với giao diện hiện đại (shadcn) và thiết kế cơ chế tải CV cực kỳ tối ưu, đẩy file trực tiếp lên S3 qua Pre-signed URLs nhằm tránh làm nghẽn backend.
+* **Tuần 8 (Cổng Nhà tuyển dụng & Dữ liệu Real-time):** Phát triển giao diện quản lý tuyển dụng và tích hợp AWS AppSync (GraphQL) để truyền trực tiếp điểm số đánh giá AI của ứng viên xuống front-end theo thời gian thực qua WebSockets.
+* **Tuần 9 (Không gian Phỏng vấn trực tuyến):** Xử lý các state phức tạp cho phòng phỏng vấn trực tiếp, tích hợp WebRTC, theo dõi âm lượng mic và các hook phân tích cảm xúc.
+* **Tuần 10 (CI/CD & Hoàn thiện):** Chuốt lại trải nghiệm người dùng với tính năng Quản lý Theme toàn cục (Dark Mode) và tự động hóa quy trình triển khai bằng việc xây dựng pipeline CI/CD với GitHub Actions, tự động đồng bộ code lên S3 và xóa cache CloudFront một cách bảo mật qua OIDC.
 
 ---
-
-## 📝 Tổng kết Cuối Tuần
-* **Thành quả lớn nhất tuần này:** Lập trình thành công một môi trường React độ phức tạp cao, chứa nhiều state, xử lý mượt mà luồng media trực tiếp, phản hồi âm thanh trực quan và chạy song song nhiều hook AI bất đồng bộ mà không làm giảm hiệu suất.
-* **Bước tiếp theo:** Chuyển sang Tuần 10, chặng đường cuối cùng! Mình sẽ tập trung đánh bóng giao diện (Dark mode qua `ThemeContext`), hoàn thiện pipeline triển khai tự động CI/CD lên AWS thông qua GitHub Actions, và thực hiện kiểm thử toàn hệ thống (end-to-end testing).
+*Kết thúc Nhật ký Thực tập OJT 10 Tuần*
