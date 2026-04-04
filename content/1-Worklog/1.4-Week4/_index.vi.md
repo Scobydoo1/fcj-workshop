@@ -1,59 +1,68 @@
+# ☁️ Nhật ký Thực tập AWS: Tuần 4 - Giám sát, DNS & Công cụ Phát triển
+
+**Trạng thái:** 🟢 Đã hoàn thành  
+**Thời gian:** 26/01/2025 - 01/02/2025  
+**Mục tiêu:** Triển khai khả năng giám sát hệ thống, cấu hình định tuyến DNS lai (hybrid) và làm quen với các môi trường phát triển tích hợp trên cloud.
+
+Tài liệu này theo dõi tiến độ Tuần 4 trong quá trình đi OJT tại AWS. Khi lưu trữ, máy chủ và cơ sở dữ liệu đã sẵn sàng, tuần này tập trung vào việc tạo ra cái nhìn toàn cảnh (visibility) về các tài nguyên đó, định tuyến lưu lượng an toàn và tối ưu hóa quy trình phát triển.
+
 ---
-title: "Worklog Tuần 4"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.4. </b> "
+
+## 📅 Nhật ký Công việc Hàng ngày
+
+### Bài 4.1: Giám sát Hệ thống (Amazon CloudWatch)
+* **Ngày hoàn thành:** 27/01/2025
+* **Thời gian thực hiện:** 3.5 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
+
+**Công việc đã thực hiện:**
+- [x] Cài đặt CloudWatch Agent lên các máy chủ EC2 hiện có để theo dõi RAM và ổ cứng (những thông số không được theo dõi mặc định).
+- [x] Tạo một CloudWatch Dashboard tùy chỉnh tập trung hiển thị CPU của EC2, số lượng kết nối RDS và lưu lượng mạng của ASG.
+- [x] Thiết lập CloudWatch Alarms để tự động gửi email thông báo qua SNS nếu CPU của database vượt 80% trong 5 phút.
+- [x] Khám phá CloudWatch Logs và các log group.
+
+**Ghi chú & Quan sát:**
+> Việc làm quen với CloudWatch Logs là một ưu tiên. Hiểu cách các luồng log (log streams) được thu thập và phân trúc là bước đầu tiên cực kỳ cần thiết để xây dựng hệ thống phát hiện bất thường log AWS Sentinel vào cuối tháng này.
+
+**Tài liệu đính kèm (Artifacts):**
+- 🖼️ `[cloudwatch-custom-dashboard.png]`
+- 📄 `[cloudwatch-agent-config.json]`
+
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Bài 4.2: DNS & Định tuyến lưu lượng (Amazon Route 53)
+* **Ngày hoàn thành:** 29/01/2025
+* **Thời gian thực hiện:** 3.0 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-### Mục tiêu tuần 4:
+**Công việc đã thực hiện:**
+- [x] Đăng ký một tên miền thử nghiệm (hoặc dùng file host local để mô phỏng).
+- [x] Tạo một Hosted Zone trên Route 53.
+- [x] Cấu hình các bản ghi 'A' (A Records) để trỏ domain về EC2 Auto Scaling Group.
+- [x] Cấu hình bản ghi Alias để trỏ trực tiếp một subdomain về S3 bucket đang chứa trang web tĩnh đã tạo ở Tuần 3.
+- [x] Thiết lập hệ thống DNS lai (hybrid DNS) giữa môi trường Local mô phỏng và Amazon VPC.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+**Khắc phục sự cố / Bài học:**
+> Việc trỏ domain thẳng vào S3 bucket là một cách rất gọn gàng để public giao diện React frontend cho người dùng. Trong môi trường thực tế (production), mình sẽ đặt CloudFront phía trước S3 và trỏ Route 53 về CloudFront để tận dụng bộ nhớ đệm tại biên (edge caching) và hỗ trợ HTTPS.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Bài 4.3: Cloud IDE & Máy chủ đơn giản (Cloud9 & Lightsail)
+* **Ngày hoàn thành:** 31/01/2025
+* **Thời gian thực hiện:** 2.5 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-### Kết quả đạt được tuần 4:
+**Công việc đã thực hiện:**
+- [x] Khởi tạo môi trường AWS Cloud9 sử dụng máy chủ EC2 `t2.micro`.
+- [x] Clone một repository mẫu vào Cloud9 IDE và thử nghiệm chỉnh sửa code trên trình duyệt cùng với việc truy cập terminal.
+- [x] Triển khai một stack LAMP cấu hình sẵn trên Amazon Lightsail để so sánh sự đơn giản của nó với việc tự tạo EC2.
+- [x] Phân tích sự khác biệt về chi phí giữa mức giá cố định của Lightsail và giá on-demand của EC2.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Ghi chú & Quan sát:**
+> Cloud9 cực kỳ hữu ích để sửa lỗi nhanh hoặc debug nhóm trực tiếp trên môi trường AWS. Mặc dù mình vẫn sẽ dùng EC2/EKS để triển khai ứng dụng Java Spring Boot chính nhằm kiểm soát hoàn toàn kiến trúc, nhưng Lightsail lại là một giải pháp thay thế tuyệt vời, dễ dự toán chi phí để dựng nhanh các bản prototype.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+---
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+## 📝 Tổng kết Cuối Tuần
+* **Thành quả lớn nhất tuần này:** Nắm bắt được toàn bộ trạng thái hệ thống thông qua các dashboard CloudWatch tùy chỉnh và cấu hình thành công định tuyến DNS tới cả máy chủ và bộ nhớ tĩnh.
+* **Các khái niệm cần ôn tập lại:** Cần nghiên cứu thêm về Route 53 Health Checks và các chính sách định tuyến dự phòng (failover routing) để đảm bảo ứng dụng web không bị gián đoạn khi có sự cố.
