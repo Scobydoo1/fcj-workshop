@@ -1,67 +1,32 @@
-# ☁️ AWS Training Worklog: Week 9 - Real-Time AI Interview Workspace
+# 🚀 10-Week AWS & SmartHire Engineering Journey: Complete Summary
 
 **Status:** 🟢 Completed  
-**Timeframe:** 02/03/2025 - 08/03/2025  
-**Objective:** Architect and implement the real-time Interview Workspace, managing device permissions, media streams, and complex AI interaction states.
+**Timeframe:** January 2025 - March 2025  
+**Project:** SmartHire AI & AWS Cloud Infrastructure  
 
-This week, I tackled the core feature of the SmartHire platform: the live AI interview environment. This required moving beyond standard CRUD operations into managing continuous data streams, WebRTC device handling, and coordinating multiple simultaneous AI hooks (speech-to-text, emotion tracking, and code execution).
-
----
-
-## 📅 Daily Task Log
-
-### Module 9.1: Workspace Layout & Device Permissions
-* **Date Completed:** 03/03/2025
-* **Time Spent:** 4.0 hours
-* **Status:** [ ] To Do | [ ] In Progress | [x] Done
-
-**Work Performed:**
-- [x] Developed the `InterviewWorkspace.tsx` as the main orchestrator for the interview session.
-- [x] Implemented a 3-panel layout: `LeftPanel` (video feed), `CenterPanel` (code editor/whiteboard), and `RightPanel` (chat/transcript).
-- [x] Created the `PermissionsModal.tsx` to handle browser requests for camera and microphone access gracefully before the interview starts.
-- [x] Built the `useMediaDevices.ts` hook to enumerate available input devices and manage the active media streams.
-
-**Notes & Observations:**
-> Handling browser permissions is tricky because users can deny them or have hardware issues. The `PermissionsModal` is crucial here to ensure a hard stop if we cannot secure the media streams required for the AI to analyze the candidate.
+This document provides a high-level summary of my 10-week On-the-Job Training (OJT) journey. The training was divided into two major phases: establishing foundational cloud infrastructure and developing a cloud-native, AI-powered recruitment platform.
 
 ---
 
-### Module 9.2: Media Streaming & Session State
-* **Date Completed:** 05/03/2025
-* **Time Spent:** 4.5 hours
-* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+## 🏗️ Phase 1: AWS Core Foundations (Weeks 1–5)
+The first half of the training focused on establishing a secure, resilient, and scalable cloud infrastructure capable of hosting enterprise applications.
 
-**Work Performed:**
-- [x] Developed the `useMicVolume.ts` hook using the Web Audio API (`AudioContext` and `AnalyserNode`) to create a visual volume indicator when the candidate is speaking.
-- [x] Created the `useSessionRecorder.ts` hook to capture the live video/audio feed using the `MediaRecorder` API, preparing it for upload to AWS S3 after the interview.
-- [x] Implemented `useAIState.ts` to manage the complex state machine of the AI interviewer (e.g., "Listening", "Thinking", "Speaking").
-- [x] Built the `EndInterviewModal.tsx` to handle the graceful termination and cleanup of the session.
-
-**Troubleshooting / Learnings:**
-> I noticed memory leaks initially when switching away from the interview page. I had to strictly ensure that all media tracks are stopped (`track.stop()`) and the `AudioContext` is closed within the `useEffect` cleanup functions of these hooks.
-
-**Artifacts:**
-- 📄 `[useMicVolume.ts]`
-- 📄 `[useAIState.ts]`
+* **Week 1 (Security & Governance):** Locked down the root account, established zero-spend billing alarms, and implemented strict Identity and Access Management (IAM) policies with MFA for daily administrative access.
+* **Week 2 (Networking & Compute):** Architected a custom Virtual Private Cloud (VPC) with public/private subnets and deployed the first Ubuntu EC2 instances securely accessed via SSH and assigned IAM roles.
+* **Week 3 (Storage, Databases & Scaling):** Set up Amazon S3 for static hosting, isolated a MySQL database in a private subnet using RDS, and configured an Auto Scaling Group (ASG) to handle traffic spikes automatically.
+* **Week 4 (Observability & Routing):** Gained system visibility using custom CloudWatch dashboards and alarms, and configured Route 53 for hybrid DNS traffic routing.
+* **Week 5 (Capstone Architecture):** Brought all foundational pieces together to deploy a highly available, fault-tolerant 3-tier web application utilizing Application Load Balancers (ALB) and Multi-AZ database failover.
 
 ---
 
-### Module 9.3: AI Integrations (Speech, Emotion, Code)
-* **Date Completed:** 07/03/2025
-* **Time Spent:** 5.0 hours
-* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+## 💻 Phase 2: SmartHire AI Development (Weeks 6–10)
+The second half shifted entirely to application development, focusing on building the SmartHire AI portal using React/Vite and integrating it with AWS cloud-native services.
 
-**Work Performed:**
-- [x] Implemented `useSpeechTranscript.ts` to handle real-time Speech-to-Text conversion (preparing for Amazon Transcribe integration).
-- [x] Built the `useEmotionAnalysis.ts` hook, which captures video frames at intervals to be sent to the backend `emotion_tracker_lambda` for facial analysis.
-- [x] Developed `useCodeRunner.ts` to execute candidate code snippets safely and return outputs to the `CenterPanel` interface.
-- [x] Synchronized these hooks within the `InterviewWorkspace` so that speech, emotion data, and code states are sent collectively to the orchestrator.
-
-**Notes & Observations:**
-> This is where the platform truly feels like "AI." Coordinating the intervals for emotion frame capturing without blocking the main React render thread was a challenge. I had to optimize the frame extraction logic to ensure the video feed remains perfectly smooth for the candidate.
+* **Week 6 (Project Kickoff & Auth):** Scaffolded the React repository and established a secure, role-based authentication flow (Candidate vs. Recruiter) using Amazon Cognito, served securely via CloudFront.
+* **Week 7 (Candidate Portal & S3 Uploads):** Built the candidate dashboard using modern UI components (shadcn) and engineered a highly efficient, direct-to-S3 CV upload mechanism using Pre-signed URLs to bypass backend bottlenecks.
+* **Week 8 (Recruiter Portal & Real-Time Data):** Developed the recruiter job management interface and integrated AWS AppSync (GraphQL) to stream real-time candidate AI evaluation scores directly to the front-end via WebSockets.
+* **Week 9 (Interview Workspace):** Focused on complex state management for the live interview room, integrating WebRTC, microphone volume tracking, and emotion analysis hooks.
+* **Week 10 (CI/CD & Polishing):** Finalized the user experience with global Theme Management (Dark Mode) and automated the deployment lifecycle by building a GitHub Actions CI/CD pipeline that securely syncs code to S3 and invalidates the CloudFront cache via OIDC.
 
 ---
-
-## 📝 End of Week Summary
-* **Biggest achievement this week:** Successfully engineered a highly complex, state-heavy React environment that handles live media streams, visual audio feedback, and multiple asynchronous AI processing hooks simultaneously without performance degradation.
-* **Next Steps:** Moving to Week 10, the final stretch! I will focus on UI/UX polishing across the app (Dark mode via `ThemeContext`), finalizing the AWS CI/CD deployment pipeline via GitHub Actions, and performing end-to-end testing.
+*End of 10-Week OJT Worklog*
