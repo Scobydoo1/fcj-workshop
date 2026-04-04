@@ -1,50 +1,84 @@
-# AWS Learning Journey: Building a Cloud Foundation
+# ☁️ AWS Training Worklog: Week 1 - Core Foundations
 
-Welcome to my AWS Learning repository! This workspace tracks my progress and documents the hands-on experience I am gaining during my On-the-Job Training. By working through these practical implementations, I am mastering the core AWS services that form the backbone of modern cloud infrastructure, from initial account setup to deploying production-ready applications.
+**Status:** 🟢 In Progress  
+**Objective:** Establish a secure, monitored baseline AWS environment and understand identity management.
 
-## 🎯 Learning Objectives
-
-This repository focuses on practical, real-world implementation experience, emphasizing not just *what* to do, but *why* and *how* to do it effectively. Key areas of focus include:
-- Account setup and cost management strategies
-- Identity and Access Management (IAM) best practices
-- Network architecture with VPC design patterns
-- Compute services deployment and optimization
-- Storage solutions and database implementations
-- Monitoring and observability frameworks
-
-## 📚 Workshop Progress Tracker
-
-Below is the roadmap of the AWS services and scenarios I am exploring. I will update these links with my notes and configurations as I complete each module.
-
-### 1. Account & Cost Management
-- [ ] **Create a new AWS Account**: Setting up the foundational environment.
-- [ ] **Manage usage costs with AWS Budgets**: Implementing cost controls and budget tracking.
-- [ ] **Request support with AWS Support**: Navigating and utilizing the AWS support ecosystem.
-
-### 2. Security & Identity
-- [ ] **Access Management with AWS IAM**: Configuring users, groups, and secure access policies.
-- [ ] **Grant application permissions via IAM Roles**: Securely allowing applications to interact with other AWS services.
-
-### 3. Networking
-- [ ] **Deploy network infrastructure with Amazon VPC**: Designing and provisioning private, secure cloud networks.
-- [ ] **Hybrid DNS with Amazon Route 53**: Setting up an integrated hybrid DNS system between local and Amazon VPC environments.
-
-### 4. Compute & Scaling
-- [ ] **Getting Started with Amazon EC2**: Deploying and managing applications on virtual servers.
-- [ ] **Using the AWS CLI on Amazon EC2**: Administering resources via the command line (Windows/Ubuntu).
-- [ ] **Automate Application Scaling with EC2 Auto Scaling**: Ensuring high availability and performance under fluctuating loads.
-- [ ] **Optimize compute costs with Amazon Lightsail**: Deploying simplified, cost-effective compute solutions.
-
-### 5. Storage & Databases
-- [ ] **Hosting a static website with Amazon S3**: Implementing secure and scalable object storage.
-- [ ] **Create a database on Amazon RDS**: Setting up and managing relational database services.
-
-### 6. Development Tools & Monitoring
-- [ ] **Use the Cloud IDE with AWS Cloud9**: Setting up a browser-based, integrated development environment.
-- [ ] **Create System Monitors with Amazon CloudWatch**: Setting up observability frameworks, alarms, and logging.
-
-### 7. Capstone Project
-- [ ] **Highly Available Web Application Workshop**: Bringing the concepts together to architect and deploy a resilient, multi-tier application.
+This document serves as my detailed technical worklog for Week 1 of my AWS training. It tracks my daily progress, configurations applied, and challenges overcome as I build a foundational understanding of AWS infrastructure.
 
 ---
-*Reference: Curriculum adapted from the [AWS Study Group - First Cloud Journey](https://cloudjourney.awsstudygroup.com/1-explore/).*
+
+## 📅 Daily Task Log
+
+### Module 1.1: Account Setup & Initialization
+* **Date Completed:** `[YYYY-MM-DD]`
+* **Time Spent:** `[X] hours`
+* **Status:** [ ] To Do | [ ] In Progress | [ ] Done
+
+**Work Performed:**
+- [ ] Registered a new AWS Free Tier account.
+- [ ] Secured the Root user (Enabled MFA, generated strong password).
+- [ ] Explored the AWS Management Console UI and regions.
+
+**Notes & Observations:**
+> *Document any specific settings you chose here (e.g., default region selected: ap-southeast-1).*
+
+---
+
+### Module 1.2: Cost Management (AWS Budgets)
+* **Date Completed:** `[YYYY-MM-DD]`
+* **Time Spent:** `[X] hours`
+* **Status:** [ ] To Do | [ ] In Progress | [ ] Done
+
+**Work Performed:**
+- [ ] Accessed the AWS Billing Dashboard.
+- [ ] Created a Zero-Spend budget to track Free Tier limits.
+- [ ] Configured an alerting system to notify my email when forecasted spend exceeds $0.01.
+
+**Troubleshooting / Learnings:**
+> *Did you encounter delays in billing updates? Note them here.*
+
+**Artifacts:**
+- 🖼️ `[Link to screenshot of active budget]`
+
+---
+
+### Module 1.3: Utilizing AWS Support
+* **Date Completed:** `[YYYY-MM-DD]`
+* **Time Spent:** `[X] hours`
+* **Status:** [ ] To Do | [ ] In Progress | [ ] Done
+
+**Work Performed:**
+- [ ] Reviewed the different AWS Support Plans (Basic, Developer, Business, Enterprise).
+- [ ] Navigated the Support Center console.
+- [ ] (Optional) Created a dummy/inquiry support ticket to understand the interface.
+
+**Key Takeaway:**
+> *Summarize the SLA differences or when to use which support tier.*
+
+---
+
+### Module 1.4: Security & Identity (AWS IAM)
+* **Date Completed:** `[YYYY-MM-DD]`
+* **Time Spent:** `[X] hours`
+* **Status:** [ ] To Do | [ ] In Progress | [ ] Done
+
+**Work Performed:**
+- [ ] Created an IAM Admin User for daily OJT tasks (avoiding Root account usage).
+- [ ] Enabled MFA for the new IAM user.
+- [ ] Created an IAM Group (e.g., `Developers`) and attached the `AdministratorAccess` policy.
+- [ ] Generated and securely stored Access Keys for future AWS CLI usage.
+- [ ] Logged in via the IAM User sign-in URL.
+
+**Challenges Faced & Resolutions:**
+> *E.g., "Initially couldn't log in with IAM user because I forgot to grant console access. Resolved by updating user credentials."*
+
+**Artifacts:**
+- 📄 `[Link to a sample JSON policy you reviewed or created]`
+- 🖼️ `[Screenshot of IAM dashboard showing 0 security warnings]`
+
+---
+
+## 📝 End of Week Summary
+* **Biggest achievement this week:** * **Concepts to review later:** ```
+
+***
