@@ -1,59 +1,70 @@
+# ☁️ Nhật ký Thực tập AWS: Tuần 2 - Nền tảng Mạng & Máy chủ tính toán
+
+**Trạng thái:** 🟢 Đã hoàn thành  
+**Thời gian:** 12/01/2025 - 18/01/2025  
+**Mục tiêu:** Thiết kế kiến trúc mạng đám mây tùy chỉnh và triển khai các máy chủ ảo để lưu trữ ứng dụng.
+
+Tài liệu này theo dõi tiến độ Tuần 2. Sau khi bảo mật tài khoản ở Tuần 1, tuần này tập trung vào việc cung cấp cấu trúc mạng cốt lõi và tài nguyên tính toán cần thiết cho việc triển khai ứng dụng.
+
 ---
-title: "Worklog Tuần 2"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.2. </b> "
+
+## 📅 Nhật ký Công việc Hàng ngày
+
+### Bài 2.1: Hạ tầng Mạng (Amazon VPC)
+* **Ngày hoàn thành:** 13/01/2025
+* **Thời gian thực hiện:** 4.0 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
+
+**Công việc đã thực hiện:**
+- [x] Tạo một Virtual Private Cloud (VPC) tùy chỉnh từ đầu.
+- [x] Cấu hình Public và Private Subnet trên hai Availability Zone để đảm bảo tính sẵn sàng cao (High Availability).
+- [x] Triển khai Internet Gateway (IGW) và cấu hình Route Table để định tuyến cho public subnet.
+- [x] Thiết lập NAT Gateway để cho phép các private subnet tải xuống các bản cập nhật một cách an toàn.
+
+**Ghi chú & Quan sát:**
+> Việc thiết kế phân chia public/private subnet rất quan trọng. Mục tiêu là sau này sẽ đặt các frontend React giao tiếp với người dùng ở public subnet (hoặc qua CloudFront), trong khi vẫn giữ các dịch vụ backend Java Spring Boot được cách ly an toàn trong private subnet.
+
+**Tài liệu đính kèm (Artifacts):**
+- 🖼️ `[vpc-resource-map-20250113.png]`
+
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Bài 2.2: Máy chủ tính toán (Amazon EC2)
+* **Ngày hoàn thành:** 15/01/2025
+* **Thời gian thực hiện:** 3.5 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-### Mục tiêu tuần 2:
+**Công việc đã thực hiện:**
+- [x] Khởi tạo một máy chủ Amazon EC2 (Ubuntu 24.04 LTS) sử dụng dòng `t2.micro` thuộc Free Tier.
+- [x] Tạo và tải xuống an toàn cặp khóa SSH `.pem`.
+- [x] Cấu hình Security Group để cho phép kết nối SSH (Port 22) từ IP tĩnh của mình và HTTP (Port 80) từ bất kỳ đâu.
+- [x] Gán Elastic IP cho máy chủ để duy trì địa chỉ IPv4 public cố định khi khởi động lại.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+**Khắc phục sự cố / Bài học:**
+> Ban đầu gặp lỗi timeout khi cố gắng kết nối SSH. Sau khi kiểm tra, phát hiện ra Security Group đang gắn với VPC mặc định thay vì VPC tùy chỉnh mới tạo ở Bài 2.1. Đã sửa lại liên kết và SSH thành công.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Bài 2.3: IAM Roles cho EC2 & AWS CLI
+* **Ngày hoàn thành:** 17/01/2025
+* **Thời gian thực hiện:** 2.0 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-### Kết quả đạt được tuần 2:
+**Công việc đã thực hiện:**
+- [x] Tạo IAM Role với quyền chỉ đọc (read-only) đối với một số dịch vụ AWS cụ thể.
+- [x] Gắn trực tiếp IAM Role vào máy chủ EC2 đang chạy thông qua console.
+- [x] SSH vào máy chủ và cài đặt/cấu hình AWS CLI.
+- [x] Chạy các lệnh AWS CLI từ máy chủ để kiểm tra quyền truy cập mà không cần hardcode access key.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Ghi chú & Quan sát:**
+> Gắn trực tiếp IAM roles vào EC2 là một phương pháp bảo mật rất tốt. Điều này đảm bảo rằng khi triển khai các background workers hoặc logging agents — chẳng hạn như các tác vụ phục vụ cho việc phát hiện bất thường log — chúng có thể truyền dữ liệu an toàn đến các dịch vụ AWS mà không bị lộ credentials trong source code.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+**Tài liệu đính kèm (Artifacts):**
+- 📄 `[ec2-trust-policy.json]`
+- 💻 `[cli-output-sts-get-caller-identity.txt]`
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+---
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+## 📝 Tổng kết Cuối Tuần
+* **Thành quả lớn nhất tuần này:** Xây dựng thành công hệ thống mạng tùy chỉnh an toàn và triển khai một máy chủ Linux hoạt động trơn tru bên trong đó, có thể truy cập hoàn toàn qua SSH.
+* **Các khái niệm cần ôn tập lại:** Cần tìm hiểu sâu hơn về VPC Flow Logs để hiểu cách giám sát lưu lượng mạng, sẽ rất hữu ích cho việc kiểm tra và khắc phục sự cố nghẽn mạng sau này.
