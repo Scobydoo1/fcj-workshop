@@ -1,10 +1,18 @@
+---
+title: "Week 6 Worklog"
+date: 2026-02-09
+weight: 6
+chapter: false
+pre: "<b>1.6. </b>"
+---
+
 # ☁️ AWS Training Worklog: Week 6 - SmartHire Project Kickoff & AWS Auth
 
 **Status:** 🟢 Completed  
 **Timeframe:** 09/02/2025 - 15/02/2025  
 **Objective:** Initialize the SmartHire AI front-end architecture, configure static cloud hosting, and integrate Amazon Cognito for secure candidate and recruiter authentication.
 
-This week marks the transition from foundational AWS learning to applied project development. I officially kicked off the front-end development for **SmartHire**, an AI-powered recruitment platform. My focus was on scaffolding the React application and wiring up the cloud-native authentication system.
+This week marks the transition from foundational AWS learning to applied project development. I officially kicked off the front-end development for **SmartHire**, an AI-powered recruitment platform.
 
 ---
 
@@ -19,10 +27,7 @@ This week marks the transition from foundational AWS learning to applied project
 - [x] Initialized the `SmartHire-AI-dev` front-end repository using Vite, React, and TypeScript.
 - [x] Configured Tailwind CSS and basic routing structures for Guest, Candidate, and Recruiter views.
 - [x] Provisioned an Amazon S3 bucket designated for hosting the production build artifacts.
-- [x] Set up an Amazon CloudFront distribution pointing to the S3 origin to ensure low-latency content delivery and HTTPS security.
-
-**Notes & Observations:**
-> Using Vite significantly speeds up the local development loop. For the cloud side, placing CloudFront in front of S3 is a critical security practice because it allows me to keep the S3 bucket private (using Origin Access Control) while still serving the web app securely to users.
+- [x] Set up an Amazon CloudFront distribution pointing to the S3 origin.
 
 ---
 
@@ -34,11 +39,8 @@ This week marks the transition from foundational AWS learning to applied project
 **Work Performed:**
 - [x] Created a new Amazon Cognito User Pool specifically for the SmartHire application.
 - [x] Configured custom user attributes to distinguish between `Candidate` and `Recruiter` roles.
-- [x] Set up password policies (minimum length, special characters) and enabled email verification for new sign-ups.
+- [x] Set up password policies and enabled email verification for new sign-ups.
 - [x] Created Cognito App Clients and documented the Client IDs for front-end environment variables.
-
-**Troubleshooting / Learnings:**
-> I had to carefully review how Cognito handles custom claims. Ensuring the user's role (candidate vs. recruiter) is embedded in the JWT token at login will make role-based routing much easier on the React side.
 
 ---
 
@@ -50,11 +52,11 @@ This week marks the transition from foundational AWS learning to applied project
 **Work Performed:**
 - [x] Developed the `AuthLayout.tsx` to handle the UI shell for login and registration screens.
 - [x] Created custom React hooks (`useAuthLogin.ts`, `useAuthRegister.ts`) to encapsulate the AWS Cognito SDK logic.
-- [x] Built the `Login.tsx` and `Register.tsx` components, complete with validation and error handling (e.g., "User already exists").
+- [x] Built the `Login.tsx` and `Register.tsx` components with validation and error handling.
 - [x] Implemented a `ProtectedRoute` wrapper to prevent unauthenticated access to the dashboard routes.
 
 **Artifacts:**
-- 📄 `[useAuthLogin.ts]` - Custom hook interacting with Cognito.
+- 📄 `[useAuthLogin.ts]`
 - 🖼️ `[smarthire-login-ui-20250214.png]`
 
 ---

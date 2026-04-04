@@ -1,3 +1,11 @@
+---
+title: "Week 3 Worklog"
+date: 2026-01-19
+weight: 3
+chapter: false
+pre: "<b>1.3. </b>"
+---
+
 # ☁️ AWS Training Worklog: Week 3 - Storage, Databases & Auto Scaling
 
 **Status:** 🟢 Completed  
@@ -22,7 +30,7 @@ This document tracks my Week 3 progress during my OJT at AWS. Building on the ne
 - [x] Uploaded a sample `index.html` and `error.html` to test the endpoint.
 
 **Notes & Observations:**
-> S3 static hosting is incredibly cost-effective. This setup is perfectly suited for hosting the compiled static assets of our React frontends without needing to provision dedicated web servers. 
+> S3 static hosting is incredibly cost-effective. This setup is perfectly suited for hosting the compiled static assets of our React frontends without needing to provision dedicated web servers.
 
 **Artifacts:**
 - 📄 `[s3-public-read-policy.json]`
@@ -37,7 +45,7 @@ This document tracks my Week 3 progress during my OJT at AWS. Building on the ne
 **Work Performed:**
 - [x] Configured a DB Subnet Group targeting the Private Subnets created in Week 2.
 - [x] Provisioned a Free Tier MySQL RDS instance (db.t3.micro).
-- [x] Configured the RDS Security Group to strictly allow inbound traffic on Port 3306 *only* from the EC2 application server's Security Group.
+- [x] Configured the RDS Security Group to strictly allow inbound traffic on Port 3306 only from the EC2 application server's Security Group.
 - [x] Connected to the database from the bastion EC2 instance using the MySQL CLI client.
 
 **Troubleshooting / Learnings:**
@@ -61,7 +69,7 @@ This document tracks my Week 3 progress during my OJT at AWS. Building on the ne
 - [x] Stress-tested the primary instance to trigger a scale-out event.
 
 **Notes & Observations:**
-> Watching the ASG automatically spin up a new instance during the stress test was a great demonstration of cloud elasticity. Ensuring the Launch Template includes a startup bash script (User Data) is critical so new instances boot up with the application already running.
+> Watching the ASG automatically spin up a new instance during the stress test was a great demonstration of cloud elasticity.
 
 ---
 

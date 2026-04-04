@@ -1,10 +1,18 @@
+---
+title: "Week 5 Worklog"
+date: 2026-02-02
+weight: 5
+chapter: false
+pre: "<b>1.5. </b>"
+---
+
 # ☁️ AWS Training Worklog: Week 5 - Capstone: Highly Available Web Application
 
 **Status:** 🟢 Completed  
 **Timeframe:** 02/02/2025 - 08/02/2025  
 **Objective:** Integrate core AWS services to architect and deploy a resilient, highly available 3-tier web application.
 
-This document tracks my Week 5 progress. This week serves as the culmination of the foundational training, executing the "Highly Available Web Application Workshop." The goal is to bring together networking, compute, storage, and databases into a unified, fault-tolerant system.
+This document tracks my Week 5 progress. This week serves as the culmination of the foundational training, executing the "Highly Available Web Application Workshop."
 
 ---
 
@@ -17,11 +25,8 @@ This document tracks my Week 5 progress. This week serves as the culmination of 
 
 **Work Performed:**
 - [x] Reviewed the 3-tier architecture blueprint provided in the workshop.
-- [x] Audited the VPC created in Week 2 to ensure public subnets are ready for Load Balancers and private subnets are strictly isolated for Application Servers and Databases.
+- [x] Audited the VPC to ensure public subnets are ready for Load Balancers and private subnets are isolated for Application Servers and Databases.
 - [x] Configured a centralized Security Group matrix (ALB -> EC2 -> RDS) to enforce strict traffic flow.
-
-**Notes & Observations:**
-> Designing the network boundaries first made the deployment much smoother. This exact 3-tier model is what I will use moving forward to deploy our React frontends (Tier 1/Edge), Java Spring Boot APIs (Tier 2/Compute), and MySQL databases (Tier 3/Data).
 
 ---
 
@@ -35,9 +40,6 @@ This document tracks my Week 5 progress. This week serves as the culmination of 
 - [x] Verified the standby replica in the secondary Availability Zone.
 - [x] Executed a manual reboot with failover to test database resilience and monitor downtime.
 
-**Troubleshooting / Learnings:**
-> The failover process took a couple of minutes, during which the database endpoint temporarily stopped responding before DNS updated to point to the standby instance. Application-level retry logic will be critical in the Spring Boot backend to handle these brief interruptions gracefully.
-
 ---
 
 ### Module 5.3: Compute Tier & Application Load Balancing
@@ -47,7 +49,7 @@ This document tracks my Week 5 progress. This week serves as the culmination of 
 
 **Work Performed:**
 - [x] Provisioned an Application Load Balancer (ALB) across two public subnets.
-- [x] Updated the EC2 Auto Scaling Group (ASG) from Week 3 to register instances automatically with the ALB Target Group.
+- [x] Updated the EC2 Auto Scaling Group to register instances automatically with the ALB Target Group.
 - [x] Deployed a sample backend API on the EC2 instances using a User Data bootstrap script.
 - [x] Configured Health Checks on the ALB to ensure traffic is only routed to healthy instances.
 
@@ -63,16 +65,13 @@ This document tracks my Week 5 progress. This week serves as the culmination of 
 * **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
 **Work Performed:**
-- [x] Hosted the frontend application assets on the S3 bucket configured in Week 3.
+- [x] Hosted the frontend application assets on the S3 bucket.
 - [x] Updated the frontend API configuration to point to the newly created ALB DNS name.
 - [x] Used Route 53 to map a custom domain to the ALB.
-- [x] Performed an end-to-end stress test using a load-generation tool to observe the ASG scaling out and the ALB distributing traffic evenly.
-
-**Notes & Observations:**
-> Watching the entire system work in harmony was incredibly satisfying. When the CPU spiked during the stress test, CloudWatch triggered the alarm, the ASG spun up a new instance, and the ALB immediately started routing traffic to it once it passed health checks.
+- [x] Performed an end-to-end stress test to observe the ASG scaling out and the ALB distributing traffic evenly.
 
 ---
 
 ## 📝 End of Week Summary
 * **Biggest achievement this week:** Successfully deployed a fully functional, highly available 3-tier architecture capable of self-healing and automatic scaling.
-* **Concepts to review later:** Integrating AWS Certificate Manager (ACM) to enable HTTPS on the Application Load Balancer for secure end-to-end encryption.
+* **Concepts to review later:** Integrating AWS Certificate Manager (ACM) to enable HTTPS on the Application Load Balancer.

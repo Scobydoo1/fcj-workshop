@@ -1,3 +1,11 @@
+---
+title: "Week 2 Worklog"
+date: 2026-01-12
+weight: 2
+chapter: false
+pre: "<b>1.2. </b>"
+---
+
 # ☁️ AWS Training Worklog: Week 2 - Networking & Compute Basics
 
 **Status:** 🟢 Completed  
@@ -22,7 +30,7 @@ This document tracks my Week 2 progress. Having secured the account in Week 1, t
 - [x] Set up a NAT Gateway to allow private subnets to download updates securely.
 
 **Notes & Observations:**
-> Carefully architecting the public/private subnet split is crucial here. The goal is to eventually host user-facing React frontends in the public subnets (or via CloudFront later), while keeping the Java Spring Boot backend services securely isolated in the private subnets. 
+> Carefully architecting the public/private subnet split is crucial here. The goal is to eventually host user-facing React frontends in the public subnets (or via CloudFront later), while keeping the Java Spring Boot backend services securely isolated in the private subnets.
 
 **Artifacts:**
 - 🖼️ `[vpc-resource-map-20250113.png]`
@@ -57,7 +65,7 @@ This document tracks my Week 2 progress. Having secured the account in Week 1, t
 - [x] Executed AWS CLI commands from the instance to verify permissions without hardcoding any access keys.
 
 **Notes & Observations:**
-> Attaching IAM roles directly to compute instances is a great security practice. It ensures that when we eventually deploy background workers or logging agents—like those needed for log anomaly detection—they can securely stream data to AWS services without exposing credentials in the codebase.
+> Attaching IAM roles directly to compute instances is a great security practice. It ensures that when we eventually deploy background workers or logging agents they can securely stream data to AWS services without exposing credentials in the codebase.
 
 **Artifacts:**
 - 📄 `[ec2-trust-policy.json]`

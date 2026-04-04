@@ -1,10 +1,18 @@
+---
+title: "Week 10 Worklog"
+date: 2026-03-09
+weight: 10
+chapter: false
+pre: "<b>1.10. </b>"
+---
+
 # ☁️ AWS Training Worklog: Week 10 - CI/CD Pipeline & Final Polish
 
 **Status:** 🟢 Completed  
 **Timeframe:** 09/03/2025 - 15/03/2025  
 **Objective:** Finalize the frontend UI/UX (including Theme Management), automate the deployment process using GitHub Actions, and conduct end-to-end integration testing.
 
-As the SmartHire AI front-end nears completion, this week was dedicated to operational excellence and user experience. Instead of deploying manually, I focused on building a robust Continuous Integration and Continuous Deployment (CI/CD) pipeline to automatically push code changes to our AWS environment.
+As the SmartHire AI front-end nears completion, this week was dedicated to operational excellence and user experience.
 
 ---
 
@@ -17,12 +25,9 @@ As the SmartHire AI front-end nears completion, this week was dedicated to opera
 
 **Work Performed:**
 - [x] Implemented the `ThemeContext.ts` and `ThemeProvider.tsx` to manage global UI state.
-- [x] Built the `ThemeToggle.tsx` component, allowing users to seamlessly switch between Light, Dark, and System default modes.
-- [x] Audited all shadcn/ui components across Candidate and Recruiter dashboards to ensure Tailwind color variables (`bg-background`, `text-foreground`) adapt correctly to theme changes.
+- [x] Built the `ThemeToggle.tsx` component for seamless Light/Dark/System mode switching.
+- [x] Audited all shadcn/ui components to ensure Tailwind color variables adapt correctly to theme changes.
 - [x] Cleaned up mobile responsiveness using the `use-mobile.ts` hook.
-
-**Notes & Observations:**
-> Providing a built-in Dark Mode is a standard requirement for modern web applications. Utilizing Tailwind's CSS variables alongside React Context made the implementation clean and highly performant without unnecessary re-renders.
 
 **Artifacts:**
 - 📄 `[ThemeProvider.tsx]`
@@ -37,12 +42,12 @@ As the SmartHire AI front-end nears completion, this week was dedicated to opera
 
 **Work Performed:**
 - [x] Created the `.github/workflows/deploy.yml` configuration file.
-- [x] Set up pipeline steps to automatically run `npm install` and `npm run build` using the Vite bundler whenever code is pushed to the `main` or `dev` branches.
-- [x] Configured the pipeline to securely authenticate with AWS using OIDC (OpenID Connect) to avoid storing long-lived IAM access keys in GitHub Secrets.
+- [x] Set up pipeline steps to automatically run `npm install` and `npm run build` on push to `main`.
+- [x] Configured the pipeline to authenticate with AWS using OIDC (OpenID Connect).
 - [x] Added an AWS CLI step to sync the `./dist` build folder to the production S3 bucket.
 
 **Troubleshooting / Learnings:**
-> Moving from hardcoded IAM keys to an IAM OIDC Identity Provider for GitHub Actions was a major security upgrade. It grants temporary, short-lived credentials strictly scoped to the S3 upload and CloudFront invalidation tasks.
+> Moving from hardcoded IAM keys to an IAM OIDC Identity Provider was a major security upgrade — temporary, short-lived credentials scoped strictly to S3 and CloudFront tasks.
 
 **Artifacts:**
 - 📄 `[.github/workflows/deploy.yml]`
@@ -55,12 +60,9 @@ As the SmartHire AI front-end nears completion, this week was dedicated to opera
 * **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
 **Work Performed:**
-- [x] Appended a step in the GitHub Actions workflow to run `aws cloudfront create-invalidation --paths "/*"`.
-- [x] Reviewed the `buildspec.yml` file for potential parallel integration with AWS CodeBuild for backend/infrastructure pipelines.
-- [x] Tested the full CI/CD lifecycle: Pushed a minor UI text change to GitHub and verified it appeared live on the production domain within 2 minutes.
-
-**Notes & Observations:**
-> The CloudFront invalidation step is critical. Because CloudFront caches the static website files at edge locations globally, simply updating S3 isn't enough. The invalidation forces the CDN to fetch the newly built `index.html` and JavaScript chunks.
+- [x] Appended a step in GitHub Actions to run `aws cloudfront create-invalidation --paths "/*"`.
+- [x] Reviewed the `buildspec.yml` file for AWS CodeBuild integration.
+- [x] Tested the full CI/CD lifecycle: pushed a minor UI change and verified it appeared live within 2 minutes.
 
 ---
 
@@ -70,8 +72,8 @@ As the SmartHire AI front-end nears completion, this week was dedicated to opera
 * **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
 **Work Performed:**
-- [x] Executed the Candidate Flow: Registered an account, securely uploaded a CV via S3 pre-signed URLs, and viewed AI-matched jobs.
-- [x] Executed the Recruiter Flow: Created a job description, tracked the real-time AI processing via AppSync GraphQL, and reviewed candidate rankings.
+- [x] Executed the Candidate Flow: registered, uploaded a CV via S3 pre-signed URLs, and viewed AI-matched jobs.
+- [x] Executed the Recruiter Flow: created a job description, tracked real-time AI processing via AppSync, and reviewed rankings.
 - [x] Documented minor bugs and created GitHub issues for final sprint resolution.
 
 ---
