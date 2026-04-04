@@ -1,59 +1,70 @@
+# ☁️ Nhật ký Thực tập AWS: Tuần 3 - Lưu trữ, Cơ sở dữ liệu & Auto Scaling
+
+**Trạng thái:** 🟢 Đã hoàn thành  
+**Thời gian:** 19/01/2025 - 25/01/2025  
+**Mục tiêu:** Triển khai các giải pháp cơ sở dữ liệu có khả năng mở rộng, cấu hình lưu trữ object an toàn cho frontend, và thiết lập tự động mở rộng máy chủ.
+
+Tài liệu này theo dõi tiến độ Tuần 3 trong quá trình đi OJT tại AWS của mình. Dựa trên hạ tầng mạng đã thiết lập ở tuần trước, trọng tâm của tuần này là bổ sung khả năng lưu trữ, quản lý dữ liệu bền vững và đảm bảo tính sẵn sàng cao (High Availability).
+
 ---
-title: "Worklog Tuần 3"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.3. </b> "
+
+## 📅 Nhật ký Công việc Hàng ngày
+
+### Bài 3.1: Lưu trữ Object (Amazon S3)
+* **Ngày hoàn thành:** 20/01/2025
+* **Thời gian thực hiện:** 2.5 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
+
+**Công việc đã thực hiện:**
+- [x] Tạo Amazon S3 bucket mới với tên định danh duy nhất (globally unique).
+- [x] Tắt tính năng "Block Public Access" và gắn JSON Bucket Policy tùy chỉnh để cho phép quyền đọc public đối với các file cụ thể.
+- [x] Bật tính năng Static Website Hosting (Lưu trữ trang web tĩnh) trên bucket.
+- [x] Tải lên file `index.html` và `error.html` mẫu để kiểm tra đường dẫn.
+
+**Ghi chú & Quan sát:**
+> S3 static hosting cực kỳ tiết kiệm chi phí. Giải pháp này hoàn toàn phù hợp để host các file tĩnh sau khi build của các ứng dụng React frontend mà không cần phải thuê các web server chuyên dụng.
+
+**Tài liệu đính kèm (Artifacts):**
+- 📄 `[s3-public-read-policy.json]`
+
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Bài 3.2: Cơ sở dữ liệu quan hệ (Amazon RDS)
+* **Ngày hoàn thành:** 22/01/2025
+* **Thời gian thực hiện:** 4.0 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-### Mục tiêu tuần 3:
+**Công việc đã thực hiện:**
+- [x] Cấu hình DB Subnet Group nhắm vào các Private Subnets đã tạo ở Tuần 2.
+- [x] Khởi tạo một RDS MySQL thuộc Free Tier (dòng db.t3.micro).
+- [x] Cấu hình RDS Security Group để chỉ cho phép luồng truy cập vào cổng 3306 *duy nhất* từ Security Group của máy chủ ứng dụng EC2.
+- [x] Kết nối thành công tới database từ máy chủ EC2 (dùng làm bastion host) thông qua MySQL CLI.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+**Khắc phục sự cố / Bài học:**
+> Đặt RDS trong private subnet đảm bảo nó không có Public IP, bảo vệ hoàn toàn khỏi internet. Mô hình cơ sở dữ liệu này chính xác là những gì mình cần để kết nối an toàn với các dịch vụ backend Java Spring Boot sẽ triển khai sau này.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+**Tài liệu đính kèm (Artifacts):**
+- 🖼️ `[rds-connectivity-success-20250122.png]`
 
+---
 
-### Kết quả đạt được tuần 3:
+### Bài 3.3: Tính Sẵn sàng Cao (Amazon EC2 Auto Scaling)
+* **Ngày hoàn thành:** 24/01/2025
+* **Thời gian thực hiện:** 3.5 giờ
+* **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Công việc đã thực hiện:**
+- [x] Tạo EC2 Launch Template chứa AMI và Security Groups đã cấu hình từ Tuần 2.
+- [x] Khởi tạo Auto Scaling Group (ASG) trải dài trên nhiều public subnets.
+- [x] Thiết lập giới hạn dung lượng Tối thiểu, Mong muốn và Tối đa (VD: Min: 1, Max: 3).
+- [x] Cấu hình Target Tracking Scaling Policy để tự động thêm máy chủ nếu mức sử dụng CPU trung bình vượt quá 70%.
+- [x] Thực hiện stress-test trên máy chủ chính để kích hoạt sự kiện scale-out (mở rộng).
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+**Ghi chú & Quan sát:**
+> Việc quan sát ASG tự động tạo thêm máy chủ mới trong lúc stress-test là một minh chứng tuyệt vời cho tính linh hoạt (elasticity) của cloud. Cần đảm bảo Launch Template có chứa script khởi động (User Data) để máy chủ mới bật lên là ứng dụng đã sẵn sàng chạy.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+---
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+## 📝 Tổng kết Cuối Tuần
+* **Thành quả lớn nhất tuần này:** Cách ly thành công tầng database trong mạng nội bộ mà vẫn duy trì được quyền truy cập bảo mật, đồng thời thiết lập được cơ chế mở rộng máy chủ tự động để đảm bảo tính sẵn sàng cao.
+* **Các khái niệm cần ôn tập lại:** Cần thực hành tạo các policy sao chép S3 chéo tài khoản (cross-account replication), và tìm hiểu thêm về RDS Read Replicas để tối ưu khả năng mở rộng database.
