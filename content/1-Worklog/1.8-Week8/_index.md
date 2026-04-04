@@ -1,57 +1,68 @@
+# ☁️ AWS Training Worklog: Week 8 - Recruiter Dashboard & Real-Time AppSync
+
+**Status:** 🟢 Completed  
+**Timeframe:** 23/02/2025 - 01/03/2025  
+**Objective:** Develop the Recruiter interface for job management and implement AWS AppSync GraphQL subscriptions to receive real-time candidate scoring updates from the AI backend.
+
+With the Candidate flow functioning, this week I pivoted to the Recruiter side of SmartHire AI. The main challenge was ensuring that recruiters don't have to manually refresh the page to see when a candidate's CV has been processed by our AI Lambdas. To solve this, I integrated AWS AppSync to push real-time updates to the React client via WebSockets.
+
 ---
-title: "Week 8 Worklog"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.8. </b> "
+
+## 📅 Daily Task Log
+
+### Module 8.1: Recruiter Layout & Navigation
+* **Date Completed:** 24/02/2025
+* **Time Spent:** 3.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Designed and implemented `RecruiterShell.tsx` to serve as the master layout for recruiter routes.
+- [x] Built the `RecruiterAppSidebar.tsx` utilizing shadcn/ui components for a clean, collapsible navigation menu.
+- [x] Created the `DashboardHome.tsx` to give recruiters a high-level overview of active jobs and total applicants.
+- [x] Ensured role-based access control (RBAC) routes correctly redirect users based on their Cognito custom attributes.
+
+**Notes & Observations:**
+> The recruiter interface needs to be heavily data-dense compared to the candidate UI. Using a sidebar layout instead of a top navbar provides much more horizontal screen real estate for data tables and AI reports.
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 8.2: Job Management & Candidate Rankings
+* **Date Completed:** 26/02/2025
+* **Time Spent:** 4.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 8 Objectives:
+**Work Performed:**
+- [x] Developed the `JobCreation.tsx` page, allowing recruiters to input Job Descriptions (JDs) which will be sent to our `jd_parser` AI Lambda.
+- [x] Built the `CandidateRankings.tsx` component to display a sortable data table of applicants.
+- [x] Created the `CandidateReport.tsx` view to show the detailed AI breakdown (skills matched, missing keywords, experience evaluation).
+- [x] Connected the UI components to local state management to prepare for API integration.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Artifacts:**
+- 🖼️ `[recruiter-rankings-dashboard.png]`
+- 📄 `[CandidateRankings.tsx]`
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Module 8.3: Real-Time GraphQL via AWS AppSync
+* **Date Completed:** 28/02/2025
+* **Time Spent:** 5.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 8 Achievements:
+**Work Performed:**
+- [x] Set up the `appSyncOperations.ts` library file to define the GraphQL queries, mutations, and subscriptions based on the `appsync_schema.graphql` definition.
+- [x] Developed the `useAppSyncSubscription.ts` custom React hook to manage WebSocket connections securely.
+- [x] Integrated the subscription hook into the `CandidateRankings` component so that when the AWS Step Functions backend finishes scoring a candidate, the frontend UI table updates instantly.
+- [x] Handled AppSync authentication using the Amazon Cognito User Pool tokens established in Week 6.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Troubleshooting / Learnings:**
+> Working with GraphQL subscriptions required careful handling of the React component lifecycle. I had to ensure the WebSocket connection in `useAppSyncSubscription.ts` properly cleans up (unsubscribes) when the component unmounts to prevent memory leaks and duplicate data rendering. 
 
-* Successfully created and configured an AWS Free Tier account.
+**Artifacts:**
+- 📄 `[useAppSyncSubscription.ts]`
+- 📄 `[appSyncOperations.ts]`
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+---
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Successfully implemented AWS AppSync GraphQL subscriptions, creating a reactive UI where recruiters can watch candidate scores populate in real-time as the AI backend processes the CVs.
+* **Next Steps:** Moving into the most complex frontend module: the real-time Interview Workspace (WebRTC, mic volume tracking, and emotion analysis hooks).

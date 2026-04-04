@@ -1,57 +1,64 @@
+# ☁️ AWS Training Worklog: Week 6 - SmartHire Project Kickoff & AWS Auth
+
+**Status:** 🟢 Completed  
+**Timeframe:** 09/02/2025 - 15/02/2025  
+**Objective:** Initialize the SmartHire AI front-end architecture, configure static cloud hosting, and integrate Amazon Cognito for secure candidate and recruiter authentication.
+
+This week marks the transition from foundational AWS learning to applied project development. I officially kicked off the front-end development for **SmartHire**, an AI-powered recruitment platform. My focus was on scaffolding the React application and wiring up the cloud-native authentication system.
+
 ---
-title: "Week 6 Worklog"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 1.6. </b> "
+
+## 📅 Daily Task Log
+
+### Module 6.1: Front-end Scaffolding & AWS Hosting Prep
+* **Date Completed:** 10/02/2025
+* **Time Spent:** 3.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Initialized the `SmartHire-AI-dev` front-end repository using Vite, React, and TypeScript.
+- [x] Configured Tailwind CSS and basic routing structures for Guest, Candidate, and Recruiter views.
+- [x] Provisioned an Amazon S3 bucket designated for hosting the production build artifacts.
+- [x] Set up an Amazon CloudFront distribution pointing to the S3 origin to ensure low-latency content delivery and HTTPS security.
+
+**Notes & Observations:**
+> Using Vite significantly speeds up the local development loop. For the cloud side, placing CloudFront in front of S3 is a critical security practice because it allows me to keep the S3 bucket private (using Origin Access Control) while still serving the web app securely to users.
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 6.2: Identity Management (Amazon Cognito Setup)
+* **Date Completed:** 12/02/2025
+* **Time Spent:** 4.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 6 Objectives:
+**Work Performed:**
+- [x] Created a new Amazon Cognito User Pool specifically for the SmartHire application.
+- [x] Configured custom user attributes to distinguish between `Candidate` and `Recruiter` roles.
+- [x] Set up password policies (minimum length, special characters) and enabled email verification for new sign-ups.
+- [x] Created Cognito App Clients and documented the Client IDs for front-end environment variables.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Troubleshooting / Learnings:**
+> I had to carefully review how Cognito handles custom claims. Ensuring the user's role (candidate vs. recruiter) is embedded in the JWT token at login will make role-based routing much easier on the React side.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+---
 
+### Module 6.3: React Authentication Components
+* **Date Completed:** 14/02/2025
+* **Time Spent:** 4.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 6 Achievements:
+**Work Performed:**
+- [x] Developed the `AuthLayout.tsx` to handle the UI shell for login and registration screens.
+- [x] Created custom React hooks (`useAuthLogin.ts`, `useAuthRegister.ts`) to encapsulate the AWS Cognito SDK logic.
+- [x] Built the `Login.tsx` and `Register.tsx` components, complete with validation and error handling (e.g., "User already exists").
+- [x] Implemented a `ProtectedRoute` wrapper to prevent unauthenticated access to the dashboard routes.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Artifacts:**
+- 📄 `[useAuthLogin.ts]` - Custom hook interacting with Cognito.
+- 🖼️ `[smarthire-login-ui-20250214.png]`
 
-* Successfully created and configured an AWS Free Tier account.
+---
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Successfully bridged the gap between a local React project and AWS by fully implementing a secure, cloud-backed authentication flow using Amazon Cognito.
+* **Next Steps:** Moving into the Candidate and Recruiter dashboards, and preparing to connect the front-end to AWS AppSync for real-time data subscriptions.

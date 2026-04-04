@@ -1,57 +1,81 @@
+# ☁️ AWS Training Worklog: Week 10 - CI/CD Pipeline & Final Polish
+
+**Status:** 🟢 Completed  
+**Timeframe:** 09/03/2025 - 15/03/2025  
+**Objective:** Finalize the frontend UI/UX (including Theme Management), automate the deployment process using GitHub Actions, and conduct end-to-end integration testing.
+
+As the SmartHire AI front-end nears completion, this week was dedicated to operational excellence and user experience. Instead of deploying manually, I focused on building a robust Continuous Integration and Continuous Deployment (CI/CD) pipeline to automatically push code changes to our AWS environment.
+
 ---
-title: "Week 10 Worklog"
-date: 2024-01-01
-weight: 2
-chapter: false
-pre: " <b> 1.10. </b> "
+
+## 📅 Daily Task Log
+
+### Module 10.1: UI/UX Polishing & Theme Management
+* **Date Completed:** 10/03/2025
+* **Time Spent:** 3.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
+
+**Work Performed:**
+- [x] Implemented the `ThemeContext.ts` and `ThemeProvider.tsx` to manage global UI state.
+- [x] Built the `ThemeToggle.tsx` component, allowing users to seamlessly switch between Light, Dark, and System default modes.
+- [x] Audited all shadcn/ui components across Candidate and Recruiter dashboards to ensure Tailwind color variables (`bg-background`, `text-foreground`) adapt correctly to theme changes.
+- [x] Cleaned up mobile responsiveness using the `use-mobile.ts` hook.
+
+**Notes & Observations:**
+> Providing a built-in Dark Mode is a standard requirement for modern web applications. Utilizing Tailwind's CSS variables alongside React Context made the implementation clean and highly performant without unnecessary re-renders.
+
+**Artifacts:**
+- 📄 `[ThemeProvider.tsx]`
+- 📄 `[ThemeToggle.tsx]`
+
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Module 10.2: GitHub Actions CI/CD Setup
+* **Date Completed:** 12/03/2025
+* **Time Spent:** 4.5 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-### Week 10 Objectives:
+**Work Performed:**
+- [x] Created the `.github/workflows/deploy.yml` configuration file.
+- [x] Set up pipeline steps to automatically run `npm install` and `npm run build` using the Vite bundler whenever code is pushed to the `main` or `dev` branches.
+- [x] Configured the pipeline to securely authenticate with AWS using OIDC (OpenID Connect) to avoid storing long-lived IAM access keys in GitHub Secrets.
+- [x] Added an AWS CLI step to sync the `./dist` build folder to the production S3 bucket.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+**Troubleshooting / Learnings:**
+> Moving from hardcoded IAM keys to an IAM OIDC Identity Provider for GitHub Actions was a major security upgrade. It grants temporary, short-lived credentials strictly scoped to the S3 upload and CloudFront invalidation tasks.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+**Artifacts:**
+- 📄 `[.github/workflows/deploy.yml]`
 
+---
 
-### Week 10 Achievements:
+### Module 10.3: CloudFront Invalidation & AWS Buildspec
+* **Date Completed:** 14/03/2025
+* **Time Spent:** 3.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+**Work Performed:**
+- [x] Appended a step in the GitHub Actions workflow to run `aws cloudfront create-invalidation --paths "/*"`.
+- [x] Reviewed the `buildspec.yml` file for potential parallel integration with AWS CodeBuild for backend/infrastructure pipelines.
+- [x] Tested the full CI/CD lifecycle: Pushed a minor UI text change to GitHub and verified it appeared live on the production domain within 2 minutes.
 
-* Successfully created and configured an AWS Free Tier account.
+**Notes & Observations:**
+> The CloudFront invalidation step is critical. Because CloudFront caches the static website files at edge locations globally, simply updating S3 isn't enough. The invalidation forces the CDN to fetch the newly built `index.html` and JavaScript chunks.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+---
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+### Module 10.4: End-to-End System Testing
+* **Date Completed:** 15/03/2025
+* **Time Spent:** 4.0 hours
+* **Status:** [ ] To Do | [ ] In Progress | [x] Done
 
-* Used AWS CLI to perform basic operations such as:
+**Work Performed:**
+- [x] Executed the Candidate Flow: Registered an account, securely uploaded a CV via S3 pre-signed URLs, and viewed AI-matched jobs.
+- [x] Executed the Recruiter Flow: Created a job description, tracked the real-time AI processing via AppSync GraphQL, and reviewed candidate rankings.
+- [x] Documented minor bugs and created GitHub issues for final sprint resolution.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+---
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+## 📝 End of Week Summary
+* **Biggest achievement this week:** Successfully automated the deployment pipeline using GitHub Actions, bridging the gap between code commits and live cloud infrastructure.
+* **Next Steps:** Project presentation preparation and final code documentation review.
