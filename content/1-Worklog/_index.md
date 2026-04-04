@@ -1,7 +1,15 @@
+---
+title: "Worklog"
+date: 2026-01-05
+weight: 1
+chapter: true
+pre: "<b>1. </b>"
+---
+
 # 🚀 10-Week AWS & SmartHire Engineering Journey: Complete Summary
 
 **Status:** 🟢 Completed  
-**Timeframe:** January 2025 - March 2025  
+**Timeframe:** January 2026 - March 2026  
 **Project:** SmartHire AI & AWS Cloud Infrastructure  
 
 This document provides a high-level summary of my 10-week On-the-Job Training (OJT) journey. The training was divided into two major phases: establishing foundational cloud infrastructure and developing a cloud-native, AI-powered recruitment platform.
