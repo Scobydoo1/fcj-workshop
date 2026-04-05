@@ -1,3 +1,11 @@
+---
+title: "Tuần 2 - Nhật ký Công việc"
+date: 2026-01-12
+weight: 2
+chapter: false
+pre: " <b> 1.2. </b> "
+---
+
 # ☁️ Nhật ký Thực tập AWS: Tuần 2 - Nền tảng Mạng & Máy chủ tính toán
 
 **Trạng thái:** 🟢 Đã hoàn thành  

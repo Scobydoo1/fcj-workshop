@@ -1,3 +1,11 @@
+---
+title: "Tuần 3 - Nhật ký Công việc"
+date: 2026-01-19
+weight: 3
+chapter: false
+pre: " <b> 1.3. </b> "
+---
+
 # ☁️ Nhật ký Thực tập AWS: Tuần 3 - Lưu trữ, Cơ sở dữ liệu & Auto Scaling
 
 **Trạng thái:** 🟢 Đã hoàn thành  

@@ -1,3 +1,11 @@
+---
+title: "Tuần 6 - Nhật ký Công việc"
+date: 2026-02-09
+weight: 6
+chapter: false
+pre: " <b> 1.6. </b> "
+---
+
 # ☁️ Nhật ký Thực tập AWS: Tuần 6 - Khởi động Dự án SmartHire & AWS Auth
 
 **Trạng thái:** 🟢 Đã hoàn thành  
@@ -17,9 +25,9 @@ Tuần này đánh dấu sự chuyển giao từ việc học nền tảng AWS s
 
 **Công việc đã thực hiện:**
 - [x] Khởi tạo repository front-end `SmartHire-AI-dev` sử dụng Vite, React và TypeScript.
-- [x] Cấu hình Tailwind CSS và cấu trúc routing cơ bản cho các giao diện Guest (Khách), Candidate (Ứng viên) và Recruiter (Nhà tuyển dụng).
+- [x] Cấu hình Tailwind CSS và cấu trúc routing cơ bản cho các giao diện Guest, Candidate và Recruiter.
 - [x] Cấp phát một Amazon S3 bucket chuyên dụng để lưu trữ các file build production.
-- [x] Thiết lập Amazon CloudFront distribution trỏ đến S3 origin nhằm đảm bảo tốc độ tải trang nhanh (độ trễ thấp) và bảo mật HTTPS.
+- [x] Thiết lập Amazon CloudFront distribution trỏ đến S3 origin nhằm đảm bảo tốc độ tải trang nhanh và bảo mật HTTPS.
 
 **Ghi chú & Quan sát:**
 > Việc dùng Vite giúp tăng tốc độ phát triển local lên rất nhiều. Về phía cloud, đặt CloudFront trước S3 là một phương pháp bảo mật quan trọng, cho phép mình giữ S3 bucket ở chế độ private (dùng Origin Access Control) mà vẫn phân phối web app an toàn đến người dùng.
@@ -34,11 +42,11 @@ Tuần này đánh dấu sự chuyển giao từ việc học nền tảng AWS s
 **Công việc đã thực hiện:**
 - [x] Tạo một Amazon Cognito User Pool mới dành riêng cho ứng dụng SmartHire.
 - [x] Cấu hình các thuộc tính người dùng tùy chỉnh (custom attributes) để phân biệt giữa role `Candidate` và `Recruiter`.
-- [x] Thiết lập chính sách mật khẩu (độ dài tối thiểu, ký tự đặc biệt) và bật tính năng xác minh email cho các tài khoản mới đăng ký.
-- [x] Tạo Cognito App Clients và ghi chú lại các Client ID để đưa vào biến môi trường (environment variables) của front-end.
+- [x] Thiết lập chính sách mật khẩu và bật tính năng xác minh email cho các tài khoản mới đăng ký.
+- [x] Tạo Cognito App Clients và ghi chú lại các Client ID để đưa vào biến môi trường của front-end.
 
 **Khắc phục sự cố / Bài học:**
-> Mình đã phải nghiên cứu kỹ cách Cognito xử lý các custom claims. Việc đảm bảo role của người dùng (ứng viên hay nhà tuyển dụng) được gắn thẳng vào JWT token khi login sẽ giúp việc phân quyền routing trên React sau này dễ dàng hơn nhiều.
+> Mình đã phải nghiên cứu kỹ cách Cognito xử lý các custom claims. Việc đảm bảo role của người dùng được gắn thẳng vào JWT token khi login sẽ giúp việc phân quyền routing trên React sau này dễ dàng hơn nhiều.
 
 ---
 
@@ -50,15 +58,15 @@ Tuần này đánh dấu sự chuyển giao từ việc học nền tảng AWS s
 **Công việc đã thực hiện:**
 - [x] Lập trình `AuthLayout.tsx` để quản lý UI shell cho các màn hình đăng nhập và đăng ký.
 - [x] Tạo các custom React hooks (`useAuthLogin.ts`, `useAuthRegister.ts`) để đóng gói logic gọi AWS Cognito SDK.
-- [x] Xây dựng các component `Login.tsx` và `Register.tsx`, hoàn thiện với tính năng validate và xử lý lỗi (VD: "Người dùng đã tồn tại").
+- [x] Xây dựng các component `Login.tsx` và `Register.tsx`, hoàn thiện với tính năng validate và xử lý lỗi.
 - [x] Triển khai wrapper `ProtectedRoute` để chặn các lượt truy cập chưa xác thực vào các route dashboard.
 
 **Tài liệu đính kèm (Artifacts):**
-- 📄 `[useAuthLogin.ts]` - Custom hook tương tác với Cognito.
+- 📄 `[useAuthLogin.ts]`
 - 🖼️ `[smarthire-login-ui-20250214.png]`
 
 ---
 
 ## 📝 Tổng kết Cuối Tuần
 * **Thành quả lớn nhất tuần này:** Kết nối thành công dự án React ở local với AWS bằng cách triển khai hoàn chỉnh luồng xác thực bảo mật, sao lưu bởi hệ thống cloud Amazon Cognito.
-* **Bước tiếp theo:** Chuyển sang xây dựng giao diện Dashboard cho Candidate và Recruiter, chuẩn bị kết nối front-end với AWS AppSync để nhận dữ liệu thời gian thực (real-time subscriptions).
+* **Bước tiếp theo:** Chuyển sang xây dựng giao diện Dashboard cho Candidate và Recruiter, chuẩn bị kết nối front-end với AWS AppSync để nhận dữ liệu thời gian thực.

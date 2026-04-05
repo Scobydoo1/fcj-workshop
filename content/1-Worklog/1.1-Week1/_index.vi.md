@@ -1,3 +1,11 @@
+---
+title: "Tuần 1 - Nhật ký Công việc"
+date: 2026-01-05
+weight: 1
+chapter: false
+pre: " <b> 1.1. </b> "
+---
+
 # ☁️ Nhật ký Thực tập AWS: Tuần 1 - Nền tảng Cốt lõi
 
 **Trạng thái:** 🟢 Đã hoàn thành  

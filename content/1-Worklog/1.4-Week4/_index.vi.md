@@ -1,3 +1,11 @@
+---
+title: "Tuần 4 - Nhật ký Công việc"
+date: 2026-01-26
+weight: 4
+chapter: false
+pre: " <b> 1.4. </b> "
+---
+
 # ☁️ Nhật ký Thực tập AWS: Tuần 4 - Giám sát, DNS & Công cụ Phát triển
 
 **Trạng thái:** 🟢 Đã hoàn thành  
@@ -16,13 +24,13 @@ Tài liệu này theo dõi tiến độ Tuần 4 trong quá trình đi OJT tại
 * **Trạng thái:** [ ] Chưa làm | [ ] Đang làm | [x] Đã xong
 
 **Công việc đã thực hiện:**
-- [x] Cài đặt CloudWatch Agent lên các máy chủ EC2 hiện có để theo dõi RAM và ổ cứng (những thông số không được theo dõi mặc định).
+- [x] Cài đặt CloudWatch Agent lên các máy chủ EC2 hiện có để theo dõi RAM và ổ cứng.
 - [x] Tạo một CloudWatch Dashboard tùy chỉnh tập trung hiển thị CPU của EC2, số lượng kết nối RDS và lưu lượng mạng của ASG.
 - [x] Thiết lập CloudWatch Alarms để tự động gửi email thông báo qua SNS nếu CPU của database vượt 80% trong 5 phút.
 - [x] Khám phá CloudWatch Logs và các log group.
 
 **Ghi chú & Quan sát:**
-> Việc làm quen với CloudWatch Logs là một ưu tiên. Hiểu cách các luồng log (log streams) được thu thập và phân trúc là bước đầu tiên cực kỳ cần thiết để xây dựng hệ thống phát hiện bất thường log AWS Sentinel vào cuối tháng này.
+> Việc làm quen với CloudWatch Logs là một ưu tiên. Hiểu cách các luồng log (log streams) được thu thập và phân tích là bước đầu tiên cực kỳ cần thiết để xây dựng hệ thống phát hiện bất thường log AWS Sentinel vào cuối tháng này.
 
 **Tài liệu đính kèm (Artifacts):**
 - 🖼️ `[cloudwatch-custom-dashboard.png]`
@@ -59,7 +67,7 @@ Tài liệu này theo dõi tiến độ Tuần 4 trong quá trình đi OJT tại
 - [x] Phân tích sự khác biệt về chi phí giữa mức giá cố định của Lightsail và giá on-demand của EC2.
 
 **Ghi chú & Quan sát:**
-> Cloud9 cực kỳ hữu ích để sửa lỗi nhanh hoặc debug nhóm trực tiếp trên môi trường AWS. Mặc dù mình vẫn sẽ dùng EC2/EKS để triển khai ứng dụng Java Spring Boot chính nhằm kiểm soát hoàn toàn kiến trúc, nhưng Lightsail lại là một giải pháp thay thế tuyệt vời, dễ dự toán chi phí để dựng nhanh các bản prototype.
+> Cloud9 cực kỳ hữu ích để sửa lỗi nhanh hoặc debug nhóm trực tiếp trên môi trường AWS. Mặc dù mình vẫn sẽ dùng EC2/EKS để triển khai ứng dụng Java Spring Boot chính, nhưng Lightsail lại là một giải pháp thay thế tuyệt vời để dựng nhanh các bản prototype.
 
 ---
 
