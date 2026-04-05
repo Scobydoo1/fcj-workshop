@@ -26,8 +26,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From 01/05/2026 to 04/30/2026
 
-![Profile Picture](/images/avatar.jpg)
-
+<img src="/fcj-workshop/images/avatar.jpg" alt="Profile Picture" width="200" style="border-radius: 50%; margin: 20px 0;" />
 ### Report Content
 
 1.  [Worklog](1-Worklog/)
