@@ -1,8 +1,16 @@
+---
+title: "Sự kiện 2"
+date: 2026-03-14
+weight: 2
+chapter: false
+pre: " <b> 4.2 </b> "
+---
+
 # 📅 Báo cáo Tổng kết: Các Sự kiện Đã tham gia
 
 ---
 
-## Báo cáo Tổng kết: “AIoT Project: Locker Management”
+## Báo cáo Tổng kết: "AIoT Project: Locker Management"
 
 ### Mục tiêu Sự kiện
 * Chia sẻ các best practices trong việc tự động hóa quy trình vật lý thủ công bằng công nghệ cloud.
@@ -37,7 +45,7 @@
 * **Triển khai AI validation:** Thử nghiệm AWS Rekognition cho các quy trình yêu cầu xác minh danh tính.
 
 ### Trải nghiệm Sự kiện
-Việc tham gia workshop **“AIoT Project: Locker Management”** mang lại giá trị rất lớn, giúp tôi có cái nhìn toàn diện về việc tích hợp phần cứng với các dịch vụ AI trên cloud của AWS. Trải nghiệm chính bao gồm:
+Việc tham gia workshop **"AIoT Project: Locker Management"** mang lại giá trị rất lớn, giúp tôi có cái nhìn toàn diện về việc tích hợp phần cứng với các dịch vụ AI trên cloud của AWS. Trải nghiệm chính bao gồm:
 * **Học hỏi từ diễn giả kinh nghiệm:** Anh Aiden đã chia sẻ những phương pháp thực tiễn nhất để xây dựng hệ thống IoT tự động.
 * **Tiếp cận kỹ thuật thực tế:** Học cách định tuyến sự kiện từ Raspberry Pi lên AWS Lambda và DynamoDB. Hiểu rõ sự đánh đổi giữa việc dùng MQTT nội bộ và AWS IoT Core.
 * **Tận dụng công cụ hiện đại:** Khám phá AWS Rekognition để xác thực khuôn mặt và liên kết hành động vật lý (quét RFID) với danh tính kỹ thuật số.
@@ -50,7 +58,7 @@ Việc tham gia workshop **“AIoT Project: Locker Management”** mang lại gi
 
 ---
 
-## Báo cáo Tổng kết: “Building AI Agent with Strands”
+## Báo cáo Tổng kết: "Building AI Agent with Strands"
 
 ### Mục tiêu Sự kiện
 * Chia sẻ các best practices trong thiết kế ứng dụng Generative AI hiện đại.
@@ -85,7 +93,7 @@ Việc tham gia workshop **“AIoT Project: Locker Management”** mang lại gi
 * **Triển khai tool calling:** Kết nối các cơ sở dữ liệu và API của dự án hiện tại với LLM.
 
 ### Trải nghiệm Sự kiện
-Tham gia workshop **“Building AI Agent with Strands”** là một trải nghiệm cực kỳ giá trị, giúp tôi hiểu rõ về việc hiện đại hóa các ứng dụng AI. Trải nghiệm chính bao gồm:
+Tham gia workshop **"Building AI Agent with Strands"** là một trải nghiệm cực kỳ giá trị, giúp tôi hiểu rõ về việc hiện đại hóa các ứng dụng AI. Trải nghiệm chính bao gồm:
 * **Học hỏi từ diễn giả:** Có được cái nhìn sâu sắc về suy luận đa bước và hành vi tự chủ của AI.
 * **Tiếp cận kỹ thuật:** Học cách xây dựng Agentic Loop và định nghĩa công cụ trong framework Strands.
 * **Bài học rút ra:** Việc chỉ dựa vào LLM sẽ giới hạn năng lực của ứng dụng; tích hợp công cụ giúp lấy dữ liệu thời gian thực và tạo ra các phản hồi mang tính động.
@@ -97,7 +105,7 @@ Tham gia workshop **“Building AI Agent with Strands”** là một trải nghi
 
 ---
 
-## Báo cáo Tổng kết: “Automated Prompt Engineering: Enhancing LLM Output Quality”
+## Báo cáo Tổng kết: "Automated Prompt Engineering: Enhancing LLM Output Quality"
 
 ### Mục tiêu Sự kiện
 * Chia sẻ best practices về prompt engineering và "nghệ thuật giao tiếp với AI".
@@ -134,7 +142,7 @@ Tham gia workshop **“Building AI Agent with Strands”** là một trải nghi
 * **Áp dụng GenAIOps:** Dùng thử Amazon CloudWatch để giám sát độ trễ và tỷ lệ lỗi của Bedrock API trong môi trường hiện tại.
 
 ### Trải nghiệm Sự kiện
-Workshop **“Automated Prompt Engineering”** mang lại góc nhìn cực kỳ giá trị về việc tối ưu hóa LLM thông qua các phương pháp và công cụ tiên tiến. Trải nghiệm chính bao gồm:
+Workshop **"Automated Prompt Engineering"** mang lại góc nhìn cực kỳ giá trị về việc tối ưu hóa LLM thông qua các phương pháp và công cụ tiên tiến. Trải nghiệm chính bao gồm:
 * **Học hỏi từ diễn giả:** Góc nhìn của một kỹ sư DevOps về GenAI đã làm nổi bật tầm quan trọng của việc tối ưu chi phí và quản lý token.
 * **Tiếp cận kỹ thuật:** Học cách sử dụng DynamoDB để lưu trữ lịch sử prompt và CloudWatch để giám sát "sức khỏe" của hệ thống AI.
 * **Bài học rút ra:** Những prompt được kỹ sư hóa tốt sẽ giảm lãng phí token đồng thời cải thiện độ tin cậy của đầu ra. Giám sát ứng dụng AI cũng quan trọng không kém gì việc giám sát các microservices truyền thống.

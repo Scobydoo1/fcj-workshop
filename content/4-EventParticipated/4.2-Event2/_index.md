@@ -1,8 +1,16 @@
+---
+title: "Event 2"
+date: 2026-03-14
+weight: 2
+chapter: false
+pre: " <b> 4.2 </b> "
+---
+
 # 📅 Events Participated: Summary Reports
 
 ---
 
-## Summary Report: “AIoT Project: Locker Management”
+## Summary Report: "AIoT Project: Locker Management"
 
 ### Event Objectives
 * Share best practices in automating manual physical processes with cloud technologies.
@@ -37,7 +45,7 @@
 * **Implement AI validation:** Pilot AWS Rekognition for workflows requiring identity verification.
 
 ### Event Experience
-Attending the **“AIoT Project: Locker Management”** workshop was extremely valuable, giving me a comprehensive view of integrating edge hardware with AWS cloud-native AI. Key experiences included:
+Attending the **"AIoT Project: Locker Management"** workshop was extremely valuable, giving me a comprehensive view of integrating edge hardware with AWS cloud-native AI. Key experiences included:
 * **Learning from highly skilled speakers:** Aiden shared best practices in building automated IoT systems.
 * **Hands-on technical exposure:** Learned how to route sensor events from Raspberry Pi to AWS Lambda and DynamoDB. Understood the trade-offs of local MQTT vs. AWS IoT Core.
 * **Leveraging modern tools:** Explored AWS Rekognition for facial authentication and linking physical RFID scans with digital identities.
@@ -51,7 +59,7 @@ Attending the **“AIoT Project: Locker Management”** workshop was extremely v
 
 ---
 
-## Summary Report: “Building AI Agent with Strands”
+## Summary Report: "Building AI Agent with Strands"
 
 ### Event Objectives
 * Share best practices in modern Generative AI application design.
@@ -86,7 +94,7 @@ Attending the **“AIoT Project: Locker Management”** workshop was extremely v
 * **Implement tool calling:** Connect current project databases and APIs to the LLM.
 
 ### Event Experience
-Attending the **“Building AI Agent with Strands”** workshop was extremely valuable, giving me a comprehensive view of modernizing AI applications. Key experiences included:
+Attending the **"Building AI Agent with Strands"** workshop was extremely valuable, giving me a comprehensive view of modernizing AI applications. Key experiences included:
 * **Learning from highly skilled speakers:** Gained deep insights into multi-step reasoning and autonomous behavior.
 * **Hands-on technical exposure:** Learned how to build the Agentic Loop and define tools within the Strands framework.
 * **Lessons learned:** Relying solely on LLMs limits application capability; integrating tools allows for real-time data access and dynamic responses.
@@ -98,7 +106,7 @@ Attending the **“Building AI Agent with Strands”** workshop was extremely va
 
 ---
 
-## Summary Report: “Automated Prompt Engineering: Enhancing LLM Output Quality”
+## Summary Report: "Automated Prompt Engineering: Enhancing LLM Output Quality"
 
 ### Event Objectives
 * Share best practices in prompt engineering and the "art of communicating with AI."
@@ -135,7 +143,7 @@ Attending the **“Building AI Agent with Strands”** workshop was extremely va
 * **Adopt GenAIOps:** Pilot Amazon CloudWatch to monitor Bedrock API latency and error rates in our environments.
 
 ### Event Experience
-Attending the **“Automated Prompt Engineering”** workshop was extremely valuable, giving me a comprehensive view of optimizing LLMs using advanced methods and tools. Key experiences included:
+Attending the **"Automated Prompt Engineering"** workshop was extremely valuable, giving me a comprehensive view of optimizing LLMs using advanced methods and tools. Key experiences included:
 * **Learning from highly skilled speakers:** The DevOps perspective on GenAI highlighted the importance of cost-efficiency and token management.
 * **Hands-on technical exposure:** Learned how to use DynamoDB for storing prompt histories and CloudWatch for observing AI system health.
 * **Lessons learned:** Well-engineered prompts reduce token waste while improving output resilience. Monitoring AI applications is just as critical as monitoring traditional microservices.

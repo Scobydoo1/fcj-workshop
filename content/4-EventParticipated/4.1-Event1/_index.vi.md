@@ -1,8 +1,16 @@
+---
+title: "Sự kiện 1"
+date: 2026-01-29
+weight: 1
+chapter: false
+pre: " <b> 4.1 </b> "
+---
+
 # 📅 Báo cáo Tổng kết: Các Sự kiện Đã tham gia
 
 ---
 
-## Báo cáo Tổng kết: “AWS re:Invent Recap HCMC”
+## Báo cáo Tổng kết: "AWS re:Invent Recap HCMC"
 
 ### Mục tiêu Sự kiện
 * Cập nhật chuyên sâu về các sản phẩm mới, cải tiến dịch vụ và các best practices về kiến trúc trực tiếp từ hội nghị AWS re:Invent toàn cầu.
@@ -34,7 +42,7 @@ Sự kiện bao quát hàng loạt các bản cập nhật cốt lõi của AWS 
 * **Đánh giá DirectConnect:** Đánh giá xem điểm Vietnam DirectConnect POP mới có thể giúp giảm độ trễ cho người dùng nội địa và các dịch vụ backend của dự án như thế nào.
 
 ### Trải nghiệm Sự kiện
-Việc tham gia **“AWS re:Invent Recap HCMC”** mang lại giá trị rất lớn, vì sự kiện đã mang những công bố công nghệ đột phá từ hội nghị toàn cầu về trực tiếp với cộng đồng địa phương. Trải nghiệm chính bao gồm:
+Việc tham gia **"AWS re:Invent Recap HCMC"** mang lại giá trị rất lớn, vì sự kiện đã mang những công bố công nghệ đột phá từ hội nghị toàn cầu về trực tiếp với cộng đồng địa phương. Trải nghiệm chính bao gồm:
 * **Học hỏi từ các chuyên gia:** Có được góc nhìn rộng hơn về cách các công ty toàn cầu đang thiết kế hạ tầng của họ để đáp ứng quy mô cực lớn.
 * **Tiếp cận kỹ thuật sâu sắc:** Trọng tâm vào cơ sở dữ liệu chuyên dụng và chuyển đổi code bằng AI đã cung cấp cho tôi những kiến thức thực tiễn để giải quyết nợ kỹ thuật (technical debt).
 * **Kết nối và thảo luận:** Sự kiện mang đến cơ hội tuyệt vời để trao đổi ý tưởng với cộng đồng đam mê cloud và các kiến trúc sư AWS tại Việt Nam.

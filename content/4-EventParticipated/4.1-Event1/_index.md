@@ -1,8 +1,16 @@
+---
+title: "Event 1"
+date: 2026-01-29
+weight: 1
+chapter: false
+pre: " <b> 4.1 </b> "
+---
+
 # 📅 Events Participated: Summary Reports
 
 ---
 
-## Summary Report: “AWS re:Invent Recap HCMC”
+## Summary Report: "AWS re:Invent Recap HCMC"
 
 ### Event Objectives
 * Deep dive into the latest product releases, service updates, and architectural best practices directly from AWS re:Invent.
@@ -34,7 +42,7 @@ The event covered a broad spectrum of core AWS updates focused on Infrastructure
 * **Evaluate DirectConnect:** Assess how the new Vietnam DirectConnect POP might reduce latency for our local users and backend services.
 
 ### Event Experience
-Attending the **“AWS re:Invent Recap HCMC”** was extremely valuable, as it brought the massive scale and cutting-edge announcements of the global conference directly to the local community. Key experiences included:
+Attending the **"AWS re:Invent Recap HCMC"** was extremely valuable, as it brought the massive scale and cutting-edge announcements of the global conference directly to the local community. Key experiences included:
 * **Learning from industry experts:** Gained a broader perspective on how global companies are architecting their infrastructures for extreme scale.
 * **Deep technical exposure:** The focus on purpose-built databases and AI-assisted code transformation provided practical insights into solving technical debt.
 * **Networking and discussions:** The event offered excellent opportunities to exchange ideas with local cloud enthusiasts and AWS architects, reinforcing the importance of community in the tech industry.
