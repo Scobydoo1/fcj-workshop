@@ -1,3 +1,11 @@
+---
+title: "Đề xuất"
+date: 2026-04-04
+weight: 2
+chapter: false
+pre: "<b>2. </b>"
+---
+
 # 🚀 Đề xuất Dự án: SmartHire AI
 
 **Tên dự án:** SmartHire AI  

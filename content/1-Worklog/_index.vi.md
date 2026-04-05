@@ -1,3 +1,11 @@
+---
+title: "Nhật ký công việc"
+date: 2026-04-04
+weight: 1
+chapter: false
+pre: "<b>1. </b>"
+---
+
 # 🚀 Tổng kết Hành trình 10 tuần Kỹ thuật AWS & SmartHire
 
 **Trạng thái:** 🟢 Đã hoàn thành  
